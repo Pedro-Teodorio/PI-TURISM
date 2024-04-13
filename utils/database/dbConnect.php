@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$db = "alpha";
+$db = "echo";
 $user = "root";
 $password = "";
 $charset = "utf8mb4";
