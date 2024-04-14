@@ -1,28 +1,13 @@
 <?php
 session_start(); // Inicia a sessão
 require_once("../../utils/database/dbConnect.php");
-require_once("services/listarCategorias.php"); // Inclui o arquivo de conexão com o banco de dados
+require_once("actions/listarCategorias.php"); // Inclui o arquivo de conexão com o banco de dados
 
 if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não existir, redireciona para a página de login
   header("Location: index.php"); // Redireciona para a página de login
   exit(); // Encerra o script
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $nome = $_POST['nome'];
-  $descricao = $_POST['descricao'];
-  $ativo = isset($_POST['ativo']) ? 1 : 0;
 
-  try {
-    $sql = "INSERT INTO categoria (CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO) VALUES (:nome, :descricao, :ativo)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':nome', $nome);
-    $stmt->bindParam(':descricao', $descricao);
-    $stmt->bindParam(':ativo', $ativo);
-    $stmt->execute();
-  } catch (PDOException $e) {
-    echo $e->getMessage();
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body id="corpo">
   <div class="wrapper">
-    <aside id="sidebar">
+  <aside id="sidebar">
       <div class="d-flex">
         <button class="toggle-btn" type="button">
           <i class="lni lni-grid-alt"></i>
         </button>
         <div class="sidebar-logo">
-          <a href="#">ECHO</a>
+          <a href="../painel_admin/index.php">ECHO</a>
         </div>
       </div>
       <ul class="sidebar-nav">
@@ -63,34 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <span>Administradores</span>
           </a>
         </li>
-        <li class="sidebar-item mb-2">
-          <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-            <i class="lni lni-plus"></i>
-            <span>Cadastrar</span>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link">
+            <i class="lni lni-notepad bg-color-logo text-light"></i>
+            <span>Categorias</span>
           </a>
-          <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-            <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Produto</a>
-            </li>
-            <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Categoria</a>
-            </li>
-          </ul>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#list" aria-expanded="false" aria-controls="list-unstyled">
-            <i class="lni lni-list"></i>
-            <span>Listar</span>
+          <a href="#" class="sidebar-link">
+          <i class="lni lni-archive bg-color-logo text-light"></i>
+
+            <span>Produtos</span>
           </a>
-          <ul id="list" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-            <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Produto</a>
-            </li>
-            <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Categoria</a>
-            </li>
-          </ul>
         </li>
+
       </ul>
       <div class="sidebar-footer">
         <a href="#" class="sidebar-link">
@@ -130,9 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="card mt-4 rounded-3 border-first">
         <div class="card-header bg-first">Lista de Categorias</div>
         <div class="card-body">
-          <button type="button" class="btn btn-first-color mb-3 pe-2" data-bs-toggle="modal" data-bs-target="#categoriaModal">
-            Nova
+          <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#categoriaModal">
             <i class="bi bi-plus-lg "></i>
+            Nova
           </button>
           <table class="table table-hover text-center border">
 
@@ -159,8 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       ?>
                   </td>
                   <td>
-                    <button data-bs-toggle="modal" data-bs-target="#categoriaModalEdit" onclick="editarCategoria(<?php echo $categoria['CATEGORIA_ID']; ?>)" class="btn b">Editar</button>
-                    <button onclick="" class="btn btn-danger">Excluir</button>
+                    <button data-bs-toggle="modal" data-bs-target="#categoriaModalEdit" onclick="editarCategoria(<?php echo $categoria['CATEGORIA_ID']; ?>)" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
+                    <a href="actions/deletarCategoria.php?id=<?php echo $categoria['CATEGORIA_ID']; ?>" class="btn btn-first-color"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
               <?php } ?>
@@ -178,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Categoria</h1>
         </div>
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="actions/cadastrarCategoria.php" method="post">
             <div class="modal-body">
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -215,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
         </div>
         <div class="modal-body">
-          <form action="services/editarCategoria.php" method="post">
+          <form action="actions/editarCategoria.php" method="post">
             <div class="modal-body">
               <div class="mb-3">
 

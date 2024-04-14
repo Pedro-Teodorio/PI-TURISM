@@ -20,7 +20,7 @@
             <form action="./utils/processLogin.php" method="post">
                 <i class="bi bi-person-circle icon_login"></i>
                 <h1>Login</h1>
-                <input type="text" name="admin_user" placeholder="Usuário" required>
+                <input type="email" name="admin_user" placeholder="Email" required>
                 <input type="password" name="admin_password" placeholder="Senha" required>
                 <button id="btn_login" type="submit">Entrar</button>
                 <?php

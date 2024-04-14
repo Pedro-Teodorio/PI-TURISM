@@ -9,11 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
       $sql = "UPDATE categoria SET  CATEGORIA_NOME = :nome, CATEGORIA_DESC = :descricao, CATEGORIA_ATIVO = :ativo WHERE CATEGORIA_ID = :id";
       $stmt = $pdo->prepare($sql);
-      $stmt->bindParam(':nome', $nome);
-      $stmt->bindParam(':descricao', $descricao);
-      $stmt->bindParam(':ativo', $ativo);
-      $stmt->bindParam(':id', $id);
+      $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+      $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+      $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $stmt->execute();
+      header('Location: ../index.php');
     } catch (PDOException $e) {
       echo $e->getMessage();
     }

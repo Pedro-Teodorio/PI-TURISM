@@ -43,7 +43,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="../cadastro_categoria/index.php" class="sidebar-link">
+          <a href="../categoria/index.php" class="sidebar-link">
             <i class="lni lni-notepad bg-color-logo text-light"></i>
             <span>Categorias</span>
           </a>

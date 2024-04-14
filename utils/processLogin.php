@@ -6,7 +6,7 @@ $admin_user = $_POST['admin_user']; // Recebe o usuário do formulário
 $admin_password = $_POST['admin_password']; // Recebe a senha do formulário
 
 // Query para buscar o usuário e senha no banco de dados
-$sql = "SELECT * FROM admins WHERE admin_user = :admin_user AND admin_password = :admin_password AND admin_logged = 'Y'";
+$sql = "SELECT * FROM administrador WHERE ADM_EMAIL = :admin_user AND ADM_SENHA = :admin_password AND ADM_ATIVO = 1";
 
 $query = $pdo->prepare($sql); // Prepara a query
 $query->bindParam(':admin_user', $admin_user, PDO::PARAM_STR); // Substitui o parâmetro :admin_user pelo valor de $admin_user

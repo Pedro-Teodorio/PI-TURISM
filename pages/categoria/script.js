@@ -2,9 +2,11 @@ const editIdInput = document.querySelector("#editIdInput");
 const editNameInput = document.querySelector("#editNameInput");
 const editDescInput = document.querySelector("#editDescInput");
 const editCheck = document.querySelector("#editCheck");
+const hamBurger = document.querySelector(".toggle-btn");
+
 
 async function editarCategoria(id) {
-  const data = await fetch(`services/pegarCategoriaId.php?id=${id}`);
+  const data = await fetch(`actions/pegarCategoriaId.php?id=${id}`);
   const { erro, dados } = await data.json();
 
   console.log(dados);
@@ -18,3 +20,7 @@ async function editarCategoria(id) {
     editCheck.checked = false;
   }
 }
+
+hamBurger.addEventListener("click", function () {
+  document.querySelector("#sidebar").classList.toggle("expand");
+});

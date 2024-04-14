@@ -25,6 +25,6 @@ try {
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Ativa o modo de erros do PDO.
 } catch (PDOException $e) {
-    echo "Erro ao conectar com o banco de dados:";
-    throw new PDOException($e->getMessage()); // Lança uma exceção com a mensagem de erro.0
+    echo "Erro ao conectar com o banco de dados: " . $e->getMessage() ;
+    // Lança uma exceção com a mensagem de erro.0
 }
