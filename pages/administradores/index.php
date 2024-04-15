@@ -1,13 +1,13 @@
 <?php
 session_start(); // Inicia a sessão
-require_once("../../utils/database/dbConnect.php");
-require_once("actions/listar.php"); // Inclui o arquivo de conexão com o banco de dados
+
 
 if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não existir, redireciona para a página de login
   header("Location: index.php"); // Redireciona para a página de login
   exit(); // Encerra o script
 }
 
+require_once ("actions/listar.php")
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Categorias</title>
+  <title>Administradores</title>
   <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -43,13 +43,13 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="../administradores/index.php" class="sidebar-link">
+          <a href="#" class="sidebar-link">
             <i class="lni lni-network"></i>
             <span>Administradores</span>
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="../categoria/index.php" class="sidebar-link">
             <i class="lni lni-notepad bg-color-logo text-light"></i>
             <span>Categorias</span>
           </a>
@@ -71,14 +71,14 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
       </div>
     </aside>
     <div class="main p-3 d-flex flex-column">
-      <h1>Categorias</h1>
+      <h1>Administradores</h1>
 
       <div class="card border-first">
-        <div class="card-header bg-first">Buscar Categorias</div>
+        <div class="card-header bg-first">Buscar Administradores</div>
         <div class="card-body">
           <div class="mb-2">
             <label for="exampleFormControlInput1" class="form-label">Pesquisar</label>
-            <input type="text" class="form-control w-45" id="exampleFormControlInput1" placeholder="Digite o nome da categoria" />
+            <input type="text" class="form-control w-45" id="searchInput" placeholder="Digite o nome da categoria" />
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
@@ -99,9 +99,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
       </div>
 
       <div class="card mt-4 rounded-3 border-first">
-        <div class="card-header bg-first">Lista de Categorias</div>
+        <div class="card-header bg-first">Lista de Administradores</div>
         <div class="card-body">
-          <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#categoriaModal">
+          <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#adminModal">
             <i class="bi bi-plus-lg "></i>
             Nova
           </button>
@@ -110,19 +110,20 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
             <thead class="table-head-color">
               <th scope="col">#</th>
               <th scope="col">Nome</th>
-              <th scope="col">Descrição</th>
+              <th scope="col">Email</th>
+              <th scope="col">Senha</th>
               <th scope="col">Ativo</th>
               <th scope="col">Ações</th>
             </thead>
             <tbody>
-
-              <?php foreach (listarCategorias() as $categoria) { ?>
+            <?php foreach (listarAdministradores() as $admins) { ?>
                 <tr class="vertical-align text-center">
-                  <td><?php echo $categoria['CATEGORIA_ID']; ?></td>
-                  <td><?php echo $categoria['CATEGORIA_NOME']; ?></td>
-                  <td><?php echo $categoria['CATEGORIA_DESC']; ?></td>
+                  <td><?php echo $admins['ADM_ID']; ?></td>
+                  <td><?php echo $admins['ADM_NOME']; ?></td>
+                  <td><?php echo $admins['ADM_EMAIL']; ?></td>
+                  <td><?php echo $admins['ADM_SENHA']; ?></td>
                   <td><?php
-                      if ($categoria['CATEGORIA_ATIVO'] == 1) {
+                      if ($admins['ADM_ATIVO'] == 1) {
                         echo "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>";
                       } else {
                         echo "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
@@ -130,11 +131,12 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                       ?>
                   </td>
                   <td>
-                    <button data-bs-toggle="modal" data-bs-target="#categoriaModalEdit" onclick="editarCategoria(<?php echo $categoria['CATEGORIA_ID']; ?>)" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
-                    <a href="actions/deletar.php?id=<?php echo $categoria['CATEGORIA_ID']; ?>" class="btn btn-first-color"><i class="bi bi-trash"></i></a>
+                    <button data-bs-toggle="modal" data-bs-target="#adminModalEdit" onclick="editarAdministrador(<?php echo $admins['ADM_ID']; ?>)" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
+                    <a href="actions/deletar.php?id=<?php echo $admins['ADM_ID']; ?>" class="btn btn-first-color"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
               <?php } ?>
+                
             </tbody>
           </table>
         </div>
@@ -142,27 +144,31 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
     </div>
   </div>
 
-  <div class="modal fade" id="categoriaModal" tabindex="-1" aria-labelledby="categoriaModalLabel" aria-hidden="true">
+  <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-first">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Categoria</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Administrador</h1>
         </div>
         <div class="modal-body">
           <form action="actions/cadastrar.php" method="post">
             <div class="modal-body">
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" required>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu nome" name="nome" required>
               </div>
               <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao" required></textarea>
+                <label for="exampleFormControlInput1" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="nameInput" placeholder="Digite sua senha" name="senha" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="Digite seu email" name="email" required>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="ativo" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
-                  Categoria Ativa
+                  Administrador Ativo
                 </label>
               </div>
 
@@ -179,11 +185,11 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
     </div>
   </div>
 
-  <div class="modal fade" id="categoriaModalEdit" tabindex="-1" aria-labelledby="categoriaModalEditLabel" aria-hidden="true">
+  <div class="modal fade" id="adminModalEdit" tabindex="-1" aria-labelledby="adminModalEditLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-first">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Administrador</h1>
         </div>
         <div class="modal-body">
           <form action="actions/editar.php" method="post">
@@ -197,13 +203,17 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <input type="text" class="form-control" id="editNameInput" placeholder="Digite o nome do produto" name="nome" required>
               </div>
               <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                <textarea class="form-control" id="editDescInput" rows="3" name="descricao" required></textarea>
+                <label for="exampleFormControlInput1" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="editSenhaInput" placeholder="Digite sua senha" name="senha" required>
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="editEmailInput" placeholder="Digite seu email" name="email" required>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="ativo" id="editCheck">
                 <label class="form-check-label" for="flexCheckDefault">
-                  Categoria Ativa
+                  Administrador Ativo
                 </label>
               </div>
             </div>

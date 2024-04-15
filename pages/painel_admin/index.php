@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8" />
