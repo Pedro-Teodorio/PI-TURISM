@@ -37,7 +37,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="../administradores/index.php" class="sidebar-link">
             <i class="lni lni-network"></i>
             <span>Administradores</span>
           </a>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="../produtos/index.php" class="sidebar-link">
           <i class="lni lni-archive bg-color-logo text-light"></i>
 
             <span>Produtos</span>
