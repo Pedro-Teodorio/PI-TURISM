@@ -149,7 +149,11 @@ a.sidebar-link:hover {
 tr{
     vertical-align: middle;
 }
-
+tbody{
+    max-height: 275px;
+    overflow-y: auto;
+    
+}
 .bg-first{
     background-color: #00AFEF;
     color: #FFF;

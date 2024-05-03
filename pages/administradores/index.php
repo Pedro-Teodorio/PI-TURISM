@@ -55,9 +55,8 @@ require_once ("actions/listar.php")
           </a>
         </li>
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="../produtos/index.php" class="sidebar-link">
           <i class="lni lni-archive bg-color-logo text-light"></i>
-
             <span>Produtos</span>
           </a>
         </li>

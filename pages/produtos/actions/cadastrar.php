@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Insere imagens no banco de dados
         foreach ($imagem_urls as $index => $url) {
             $ordem = $imagem_ordens[$index];
-            $sql_imagem = "INSERT INTO produto_imagem(imagem_url, produto_id, imagem_ordem ) VALUES(:url_imagem, :produto_id, :ordem_imagem)";
+            $sql_imagem = "INSERT INTO produto_imagem(imagem_url, produto_id, imagem_ordem )VALUES(:url_imagem, :produto_id, :ordem_imagem)";
             $stmt_imagem = $pdo->prepare($sql_imagem);
             $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
             $stmt_imagem->bindParam(':produto_id', $produto_id, PDO::PARAM_STR);
@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_quantidade->bindParam(':produto_id', $produto_id, PDO::PARAM_STR);
         $stmt_quantidade->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
         $stmt_quantidade->execute();
+        
         header('Location: ../index.php');
     } catch (PDOException $e) {
         echo "<p style='color:red'>Erro ao cadastrar o produto: " . $e->getMessage() . "</p>";

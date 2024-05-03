@@ -98,14 +98,14 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
       </div>
 
-      <div class="card mt-4 rounded-3 border-first">
+      <div class="card mt-4 rounded-3 border-first tbodyDiv">
         <div class="card-header bg-first">Lista de Categorias</div>
         <div class="card-body">
           <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#categoriaModal">
             <i class="bi bi-plus-lg "></i>
             Nova
           </button>
-          <table class="table table-hover text-center border">
+          <table class="table table-hover sticky-top text-center border">
 
             <thead class="table-head-color">
               <th scope="col">#</th>
