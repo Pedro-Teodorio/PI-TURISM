@@ -7,7 +7,6 @@ if(!empty($id)){
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $retorna = ["erro" => false, "dados" => $categoria];
 }
 else{

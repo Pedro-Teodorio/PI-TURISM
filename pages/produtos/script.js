@@ -1,6 +1,8 @@
 const hamBurger = document.querySelector(".toggle-btn");
 const btn_close_modal = document.querySelector(".btn_close_modal");
 
+const inputNameEdit = document.querySelector("#editNameInput");
+
 function adicionarImages() {
   const container_images = document.querySelector(".container_images");
   container_images.innerHTML += `
@@ -23,3 +25,17 @@ btn_close_modal.addEventListener("click", () => {
 hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+async function editarProduto(id) {
+  const data = await fetch(`actions/pegarPorId.php?id=${id}`);
+  const { erro, dados } = await data.json();
+  console.log(dados[0]);
+  inputNameEdit.value = dados[0].produto_nome;
+
+  
+  // const data = await fetch(`actions/pegarPorId.php?id=${id}`);
+  // console.log(data);
+
+ 
+
+}

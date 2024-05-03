@@ -20,7 +20,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Produtos</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -79,7 +80,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <div class="card-body">
                     <div class="mb-2">
                         <label for="exampleFormControlInput1" class="form-label">Pesquisar</label>
-                        <input type="text" class="form-control w-45" id="exampleFormControlInput1" placeholder="Digite o nome do produto" />
+                        <input type="text" class="form-control w-45" id="exampleFormControlInput1"
+                            placeholder="Digite o nome do produto" />
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
@@ -102,7 +104,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
             <div class="card mt-4 rounded-3 border-first">
                 <div class="card-header bg-first">Lista de Produtos</div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#produtoModal">
+                    <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal"
+                        data-bs-target="#produtoModal">
                         <i class="bi bi-plus-lg "></i>
                         Nova
                     </button>
@@ -126,32 +129,36 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                         <tbody>
 
                             <?php foreach (listarProdutos() as $produto) { ?>
-                                <tr>
+                            <tr>
 
 
-                                    <td><?= $produto['produto_id']; ?></td>
-                                    <td><?= $produto['produto_nome']; ?></td>
-                                    <td><?= $produto['produto_desc']; ?></td>
-                                    <td><?= $produto['produto_preco']; ?></td>
-                                    <td><?= $produto['categoria_nome']; ?></td>
-                                    <td>
-                                        <?php
+                                <td><?= $produto['produto_id']; ?></td>
+                                <td><?= $produto['produto_nome']; ?></td>
+                                <td><?= $produto['produto_desc']; ?></td>
+                                <td><?= $produto['produto_preco']; ?></td>
+                                <td><?= $produto['categoria_nome']; ?></td>
+                                <td>
+                                    <?php
                                         if ($produto['produto_ativo'] == 1) {
                                             echo "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>";
                                         } else {
                                             echo "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
                                         }
                                         ?>
-                                    </td>
-                                    <td><?= $produto['produto_desconto']; ?></td>
-                                    <td><?= $produto['produto_qtd']; ?></td>
-                                    <td><img src="<?php echo $produto['imagem_url']; ?>" alt="<?php echo $produto['produto_nome']; ?>" width="50"></td>
-                                    <td><?= $produto['imagem_ordem']; ?></td>
-                                    <td>
-                                        <button data-bs-toggle="modal" data-bs-target="#produtoModalEdit" onclick="editarProduto(<?php echo $produto['produto_id']; ?>)" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
-                                        <a href="actions/deletar.php?id=<?php echo $produto['produto_id'] ?>" class="btn btn-first-color"><i class="bi bi-trash"></i></a>
-                                    </td>
-                                </tr>
+                                </td>
+                                <td><?= $produto['produto_desconto']; ?></td>
+                                <td><?= $produto['produto_qtd']; ?></td>
+                                <td><img src="<?php echo $produto['imagem_url']; ?>"
+                                        alt="<?php echo $produto['produto_nome']; ?>" width="50"></td>
+                                <td><?= $produto['imagem_ordem']; ?></td>
+                                <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#produtoModalEdit"
+                                        onclick="editarProduto(<?php echo $produto['produto_id']; ?>)"
+                                        class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
+                                    <a href="actions/deletar.php?id=<?php echo $produto['produto_id'] ?>"
+                                        class="btn btn-first-color"><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -172,10 +179,12 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" id="myTabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Produto</a>
+                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab"
+                                aria-controls="tab1" aria-selected="true">Produto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Imagens</a>
+                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab"
+                                aria-controls="tab2" aria-selected="false">Imagens</a>
                         </li>
                         <!-- Add more tabs as needed -->
                     </ul>
@@ -186,36 +195,45 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                             <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" />
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Digite o nome do produto" name="nome" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        name="descricao"></textarea>
                                 </div>
                                 <div class="mb-3 mt-3 row">
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Preço</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o preço" name="preco" />
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o preço" name="preco" />
                                     </div>
                                     <div class="col-6">
-                                        <label for="exampleFormControlInput1" class="form-label">Desconto do produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="desconto" />
+                                        <label for="exampleFormControlInput1" class="form-label">Desconto do
+                                            produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o desconto" name="desconto" />
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="select_categoria" class="form-label">Categoria</label>
-                                        <select class="form-select" aria-label="Default select example" id="select_categoria" name="categoria_id">
+                                        <select class="form-select" aria-label="Default select example"
+                                            id="select_categoria" name="categoria_id">
                                             <?php foreach (listarCategorias() as $categoria) { ?>
-                                                <option value="<?= $categoria['CATEGORIA_ID'] ?>"><?= $categoria['CATEGORIA_NOME'] ?></option>
+                                            <option value="<?= $categoria['CATEGORIA_ID'] ?>">
+                                                <?= $categoria['CATEGORIA_NOME'] ?></option>
                                             <?php } ?>
                                         </select>
 
                                     </div>
                                     <div class="col-6">
-                                        <label for="exampleFormControlInput1" class="form-label">Quantidade de Produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="quantidade" />
+                                        <label for="exampleFormControlInput1" class="form-label">Quantidade de
+                                            Produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o desconto" name="quantidade" />
                                     </div>
                                 </div>
                                 <div class="mb-3"></div>
@@ -224,23 +242,27 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Produto Ativo
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="ativo" />
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                            name="ativo" />
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" />
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Digite a URL da imagem" name="imagem_url[]" />
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-                                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
+                                    <input type="number" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
                                     <div class="container_images">
 
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <button type="button" class="btn btn-primary" onclick="adicionarImages()">Adicionar Imagens</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="adicionarImages()">Adicionar Imagens</button>
                                     </div>
                                 </div>
 
@@ -261,7 +283,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
     </div>
 
-    <div class="modal fade" id="produtoModalEdit" tabindex="-1" aria-labelledby="produtoModalEditLabel" aria-hidden="true">
+    <div class="modal fade" id="produtoModalEdit" tabindex="-1" aria-labelledby="produtoModalEditLabel"
+        aria-hidden="true">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-first">
@@ -271,50 +294,61 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" id="myTabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Produto</a>
+                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab"
+                                aria-controls="tab1" aria-selected="true">Produto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Imagens</a>
+                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab"
+                                aria-controls="tab2" aria-selected="false">Imagens</a>
                         </li>
                         <!-- Add more tabs as needed -->
                     </ul>
 
                     <!-- Tab content -->
-                    <form action="./actions/cadastrar.php" method="post">
+                    <form action="./actions/editar.php" method="post">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" />
+                                    <input type="text" class="form-control" id="editNameInput"
+                                        placeholder="Digite o nome do produto" name="nome" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        name="descricao" id="editDescInput"></textarea>
                                 </div>
-                                <div class="mb-3 mt-3 row">
+                                <div class=" mb-3 mt-3 row">
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Preço</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o preço" name="preco" />
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o preço" name="preco" />
                                     </div>
                                     <div class="col-6">
-                                        <label for="exampleFormControlInput1" class="form-label">Desconto do produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="desconto" />
+                                        <label for="exampleFormControlInput1" class="form-label">Desconto do
+                                            produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o desconto" name="desconto" />
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="select_categoria" class="form-label">Categoria</label>
-                                        <select class="form-select" aria-label="Default select example" id="select_categoria" name="categoria_id">
+                                        <select class="form-select" aria-label="Default select example"
+                                            id="select_categoria" name="categoria_id">
                                             <?php foreach (listarCategorias() as $categoria) { ?>
-                                                <option value="<?= $categoria['CATEGORIA_ID'] ?>"><?= $categoria['CATEGORIA_NOME'] ?></option>
+                                            <option value="<?= $categoria['CATEGORIA_ID'] ?>">
+                                                <?= $categoria['CATEGORIA_NOME'] ?></option>
                                             <?php } ?>
                                         </select>
 
                                     </div>
                                     <div class="col-6">
-                                        <label for="exampleFormControlInput1" class="form-label">Quantidade de Produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="quantidade" />
+                                        <label for="exampleFormControlInput1" class="form-label">Quantidade de
+                                            Produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Digite o desconto" name="quantidade" />
                                     </div>
                                 </div>
                                 <div class="mb-3"></div>
@@ -323,23 +357,27 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Produto Ativo
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="ativo" />
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                            name="ativo" />
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" />
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Digite a URL da imagem" name="imagem_url[]" />
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-                                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
+                                    <input type="number" class="form-control" id="exampleFormControlInput1"
+                                        placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
                                     <div class="container_images">
 
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <button type="button" class="btn btn-primary" onclick="adicionarImages()">Adicionar Imagens</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="adicionarImages()">Adicionar Imagens</button>
                                     </div>
                                 </div>
 
@@ -358,7 +396,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
     <script src="script.js"></script>
 </body>
 
