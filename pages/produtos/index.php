@@ -280,7 +280,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                     </ul>
 
                     <!-- Tab content -->
-                    <form action="./actions/cadastrar.php" method="post">
+                    <form action="./actions/editar.php" method="post">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                                 <div class="mb-3 mt-3">

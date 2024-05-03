@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imagem_id = $_POST['imagem_id'];
     $imagem_url = $_POST['imagem_url'];
     try {
-        $stmt = $pdo -> prepare(
+        $sql = 
             "UPDATE PRODUTO
                 LEFT JOIN PRODUTO_ESTOQUE
                     USING(PRODUTO_ID)
@@ -35,8 +35,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
               , PRODUTO.PRODUTO_ATIVO = :ativo
               , PRODUTO.CATEGORIA_ID = :categoria
               , PRODUTO_ESTOQUE.PRODUTO_QTD = :quantidade
-            WHERE PRODUTO.PRODUTO_ID = :id"
-        );
+            WHERE PRODUTO.PRODUTO_ID = :id";
+
+        $stmt = $pdo -> prepare($sql);
         $stmt -> bindParam(':id', $id, PDO::PARAM_INT);
         $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt -> bindParam(':descricao', $descricao, PDO::PARAM_STR);
@@ -47,30 +48,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
         $stmt -> execute();
         header('Location: ../index.php');
-        exit();
     } catch(PDOException $e) {
-        echo "Erro: " . $e -> getMessage();
+        echo $e->getMessage();
     }
 }
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $id = $_POST['id'];
-//     $nome = $_POST['nome'];
-//     $descricao = $_POST['descricao'];
-//     $ativo = isset($_POST['ativo']) ? 1 : 0;
-  
-//     try {
-//       $sql = "UPDATE categoria SET  CATEGORIA_NOME = :nome, CATEGORIA_DESC = :descricao, CATEGORIA_ATIVO = :ativo WHERE CATEGORIA_ID = :id";
-//       $stmt = $pdo->prepare($sql);
-//       $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
-//       $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
-//       $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
-//       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-//       $stmt->execute();
-//       header('Location: ../index.php');
-//     } catch (PDOException $e) {
-//       echo $e->getMessage();
-//     }
-//   }
 
 ?>

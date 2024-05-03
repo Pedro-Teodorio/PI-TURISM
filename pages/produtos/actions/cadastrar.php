@@ -47,6 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         header('Location: ../index.php');
     } catch (PDOException $e) {
-        echo "<p style='color:red'>Erro ao cadastrar o produto: " . $e->getMessage() . "</p>";
+        echo $e->getMessage();
     }
 }
