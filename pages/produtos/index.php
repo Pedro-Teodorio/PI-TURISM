@@ -148,7 +148,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                     <td><img src="<?php echo $produto['imagem_url']; ?>" alt="<?php echo $produto['produto_nome']; ?>" width="50"></td>
                                     <td><?= $produto['imagem_ordem']; ?></td>
                                     <td>
-                                        <button data-bs-toggle="modal" data-bs-target="#categoriaModalEdit" " class=" btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#produtoModalEdit" onclick="editarProduto(<?php echo $produto['produto_id']; ?>)" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
                                         <a href="actions/deletar.php?id=<?php echo $produto['produto_id'] ?>" class="btn btn-first-color"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
@@ -261,37 +261,96 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
     </div>
 
-    <div class="modal fade" id="categoriaModalEdit" tabindex="-1" aria-labelledby="categoriaModalEditLabel" aria-hidden="true">
+    <div class="modal fade" id="produtoModalEdit" tabindex="-1" aria-labelledby="produtoModalEditLabel" aria-hidden="true">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-first">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Produto</h1>
                 </div>
                 <div class="modal-body">
-                    <form action="actions/editar.php" method="post">
-                        <div class="modal-body">
-                            <div class="mb-3">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Produto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Imagens</a>
+                        </li>
+                        <!-- Add more tabs as needed -->
+                    </ul>
 
-                                <input type="text" class="form-control" id="editIdInput" placeholder="Digite o nome do produto" name="id" hidden>
+                    <!-- Tab content -->
+                    <form action="./actions/cadastrar.php" method="post">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                <div class="mb-3 mt-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao"></textarea>
+                                </div>
+                                <div class="mb-3 mt-3 row">
+                                    <div class="col-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Preço</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o preço" name="preco" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Desconto do produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="desconto" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="select_categoria" class="form-label">Categoria</label>
+                                        <select class="form-select" aria-label="Default select example" id="select_categoria" name="categoria_id">
+                                            <?php foreach (listarCategorias() as $categoria) { ?>
+                                                <option value="<?= $categoria['CATEGORIA_ID'] ?>"><?= $categoria['CATEGORIA_NOME'] ?></option>
+                                            <?php } ?>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="exampleFormControlInput1" class="form-label">Quantidade de Produto</label>
+                                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite o desconto" name="quantidade" />
+                                    </div>
+                                </div>
+                                <div class="mb-3"></div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Produto Ativo
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="ativo" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="editNameInput" placeholder="Digite o nome do produto" name="nome" required>
+                            <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                <div class="mb-3 mt-3">
+                                    <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" />
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
+                                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
+                                    <div class="container_images">
+
+                                    </div>
+                                    <div class="mb-3 mt-3">
+                                        <button type="button" class="btn btn-primary" onclick="adicionarImages()">Adicionar Imagens</button>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                                <textarea class="form-control" id="editDescInput" rows="3" name="descricao" required></textarea>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="ativo" id="editCheck">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Categoria Ativa
-                                </label>
-                            </div>
+                            <!-- Add more tab content as needed -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success">Editar</button>
+                            <button type="button" class="btn btn-secondary btn_close_modal" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
