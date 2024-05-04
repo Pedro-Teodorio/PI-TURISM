@@ -283,31 +283,33 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
     </div>
 
-    <div class="modal fade" id="produtoModalEdit" tabindex="-1" aria-labelledby="produtoModalEditLabel"
-        aria-hidden="true">
-        <div class=" modal-dialog modal-dialog-centered">
+    <div class="modal fade " id="produtoModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-first">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Produto</h1>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Cadastrar Produto
+                    </h5>
                 </div>
                 <div class="modal-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" id="myTabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab"
+                            <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tabEdit1" role="tab"
                                 aria-controls="tab1" aria-selected="true">Produto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab"
+                            <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tabEdit2" role="tab"
                                 aria-controls="tab2" aria-selected="false">Imagens</a>
                         </li>
                         <!-- Add more tabs as needed -->
                     </ul>
 
                     <!-- Tab content -->
-                    <form action="./actions/editar.php" method="post">
+                    <form action="./actions/cadastrar.php" method="post">
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                            <div class="tab-pane fade show active" id="tabEdit1" role="tabpanel"
+                                aria-labelledby="tab1-tab">
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlInput1" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="editNameInput"
@@ -315,10 +317,10 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                        name="descricao" id="editDescInput"></textarea>
+                                    <textarea class="form-control" id="editDescInput" rows="3"
+                                        name="descricao"></textarea>
                                 </div>
-                                <div class=" mb-3 mt-3 row">
+                                <div class="mb-3 mt-3 row">
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Preço</label>
                                         <input type="number" class="form-control" id="exampleFormControlInput1"
@@ -362,24 +364,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                                <div class="mb-3 mt-3">
-                                    <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Digite a URL da imagem" name="imagem_url[]" />
-                                </div>
-                                <div class="mb-3 mt-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-                                    <input type="number" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
-                                    <div class="container_images">
+                            <div class="tab-pane fade tab-images" id="tabEdit2" role="tabpanel"
+                                aria-labelledby="tab2-tab">
 
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="adicionarImages()">Adicionar Imagens</button>
-                                    </div>
-                                </div>
 
                             </div>
                             <!-- Add more tab content as needed -->
@@ -392,6 +379,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                         </div>
                     </form>
                 </div>
+
 
             </div>
         </div>
