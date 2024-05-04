@@ -359,8 +359,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Produto Ativo
                                         </label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                            name="ativo" />
+                                        <input class="form-check-input" type="checkbox" id="editCheck" name="ativo" />
                                     </div>
                                 </div>
                             </div>

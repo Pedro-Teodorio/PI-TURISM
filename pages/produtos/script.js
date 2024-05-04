@@ -4,6 +4,7 @@ const btn_close_modal = document.querySelector(".btn_close_modal");
 const editNameInput = document.querySelector("#editNameInput");
 const editDescInput = document.querySelector("#editDescInput");
 const tab_images = document.querySelector(".tab-images");
+const editCheck = document.querySelector("#editCheck");
 
 function adicionarImages() {
 	const container_images = document.querySelector(".container_images");
@@ -32,7 +33,7 @@ async function editarProduto(id) {
 	const data = await fetch(`actions/pegarPorId.php?id=${id}`);
 	const { erro, dados } = await data.json();
 	console.log(dados[0]);
-	inputNameEdit.value = dados[0].produto_nome;
+	editNameInput.value = dados[0].produto_nome;
 
 	let images = [];
 
@@ -56,6 +57,13 @@ async function editarProduto(id) {
           </div>
    `;
 	});
+
+  if(dados[0].produto_ativo == 1){
+    editCheck.checked = true;
+  }
+  else{
+    editCheck.checked = false;
+  }
 
 	// const data = await fetch(`actions/pegarPorId.php?id=${id}`);
 	// console.log(data);
