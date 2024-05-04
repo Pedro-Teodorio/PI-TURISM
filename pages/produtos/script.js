@@ -1,8 +1,13 @@
 const hamBurger = document.querySelector(".toggle-btn");
 const btn_close_modal = document.querySelector(".btn_close_modal");
 
-const editNameInput = document.querySelector("#editNameInput");
-const editDescInput = document.querySelector("#editDescInput");
+const inputNameEdit = document.querySelector("#editNameInput");
+const inputDescEdit = document.querySelector("#editDescInput");
+const inputPrecoEdit = document.querySelector("#editPrecoInput");
+const inputDescontoEdit = document.querySelector("#editDescontoInput");
+const inputQuantidadeEdit = document.querySelector("#editQuantidadeInput");
+const select_categoria = document.querySelectorAll("#select_categoria option");
+
 const tab_images = document.querySelector(".tab-images");
 const editCheck = document.querySelector("#editCheck");
 
@@ -32,21 +37,30 @@ hamBurger.addEventListener("click", function () {
 async function editarProduto(id) {
 	const data = await fetch(`actions/pegarPorId.php?id=${id}`);
 	const { erro, dados } = await data.json();
-	console.log(dados[0]);
-	editNameInput.value = dados[0].produto_nome;
+	inputNameEdit.value = dados[0].produto_nome;
+	inputDescEdit.value = dados[0].produto_desc;
+	inputPrecoEdit.value = dados[0].produto_preco;
+	inputDescontoEdit.value = dados[0].produto_desconto;
+	inputQuantidadeEdit.value = dados[0].produto_qtd;
 
+	select_categoria.forEach((option) => {
+		if (option.value == dados[0].categoria_id) {
+			option.selected = true;
+		}
+	});
+	console.log(dados);
 	let images = [];
 
 	dados.forEach((dado) => {
-		console.log(dado.imagem_url);
-		console.log(dado.imagem_ordem);
-		images.push({ url: dado.imagem_url, ordem: dado.imagem_ordem });
+		images.push({id: dado.imagem_id, url: dado.imagem_url, ordem: dado.imagem_ordem });
 	});
 
-	console.log(images);
-
-	images.forEach(image => {
+	images.forEach((image) => {
 		tab_images.innerHTML += `
+        <div class="mb-3 mt-3">
+        <label for="exampleFormControlInput1" class="form-label">ID Imagem</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value= "${image.id}" />
+        </div>
         <div class="mb-3 mt-3">
             <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value= "${image.url}" />
@@ -58,12 +72,11 @@ async function editarProduto(id) {
    `;
 	});
 
-  if(dados[0].produto_ativo == 1){
-    editCheck.checked = true;
-  }
-  else{
-    editCheck.checked = false;
-  }
+	if (dados[0].produto_ativo == 1) {
+		editCheck.checked = true;
+	} else {
+		editCheck.checked = false;
+	}
 
 	// const data = await fetch(`actions/pegarPorId.php?id=${id}`);
 	// console.log(data);

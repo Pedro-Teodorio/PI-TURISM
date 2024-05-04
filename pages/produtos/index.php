@@ -288,7 +288,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
             <div class="modal-content">
                 <div class="modal-header bg-first">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Cadastrar Produto
+                        Editar Produto
                     </h5>
                 </div>
                 <div class="modal-body">
@@ -306,7 +306,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                     </ul>
 
                     <!-- Tab content -->
-                    <form action="./actions/cadastrar.php" method="post">
+                    <form action="./actions/editar.php" method="post">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tabEdit1" role="tabpanel"
                                 aria-labelledby="tab1-tab">
@@ -317,20 +317,20 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                                    <textarea class="form-control" id="editDescInput" rows="3"
-                                        name="descricao"></textarea>
+                                    <textarea class="form-control" rows="3" name="descricao"
+                                        id="editDescInput"></textarea>
                                 </div>
-                                <div class="mb-3 mt-3 row">
+                                <div class=" mb-3 mt-3 row">
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Preço</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Digite o preço" name="preco" />
+                                        <input type="number" class="form-control" placeholder="Digite o preço"
+                                            name="preco" id="editPrecoInput" step="0.01" />
                                     </div>
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Desconto do
                                             produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Digite o desconto" name="desconto" />
+                                        <input type="number" class="form-control" id="editDescontoInput"
+                                            placeholder="Digite o desconto" name="desconto" step="0.01" />
                                     </div>
                                 </div>
 
@@ -349,7 +349,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                     <div class="col-6">
                                         <label for="exampleFormControlInput1" class="form-label">Quantidade de
                                             Produto</label>
-                                        <input type="number" class="form-control" id="exampleFormControlInput1"
+                                        <input type="number" class="form-control" id="editQuantidadeInput"
                                             placeholder="Digite o desconto" name="quantidade" />
                                     </div>
                                 </div>

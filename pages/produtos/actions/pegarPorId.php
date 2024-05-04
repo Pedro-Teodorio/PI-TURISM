@@ -10,7 +10,9 @@ if (!empty($id)) {
                   , produto.produto_preco
                   , produto.produto_desconto
                   , produto.produto_ativo
+                  , categoria.categoria_id
                   , categoria.categoria_nome
+                  , produto_imagem.imagem_id
                   , produto_imagem.imagem_url
                   , produto_imagem.imagem_ordem
                   , COALESCE(produto_estoque.produto_qtd,0) AS produto_qtd
