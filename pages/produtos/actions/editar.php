@@ -1,30 +1,24 @@
-<?php 
- require("../../../utils/database/dbConnect.php");
+<?php
+require("../../../utils/database/dbConnect.php");
 
-try{
-    $stmt_categoria = $pdo->prepare("SELECT * FROM CATEGORIA");
-    $stmt_categoria->execute();
-    $categorias = $stmt_categoria->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e){
-    echo "<p style='color:red;'> Erro ao buscar categorias: " . $e->getMessage() . "</p>";
-}
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $desconto = $_POST['desconto'];
     $ativo = isset($_POST['ativo']) ? 1 : 0;
-    $categoria = $_POST['categoria'];
+    $categoria = $_POST['categoria_id'];
     $quantidade = $_POST['quantidade'];
-    $imagem_id = $_POST['imagem_id'];
-    $imagem_url = $_POST['imagem_url'];
+
+    $imagem_ids = $_POST['imagem_id'];
+    $imagem_urls = $_POST['imagem_url'];
+    $imagem_ordens = $_POST['imagem_ordem'];
     try {
-        $stmt = $pdo -> prepare(
+        $stmt = $pdo->prepare(
             "UPDATE PRODUTO
                 LEFT JOIN PRODUTO_ESTOQUE
-                    USING(PRODUTO_ID)
-                LEFT JOIN PRODUTO_IMAGEM
                     USING(PRODUTO_ID)
             SET
                 PRODUTO.PRODUTO_NOME = :nome
@@ -36,19 +30,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
               , PRODUTO_ESTOQUE.PRODUTO_QTD = :quantidade
             WHERE PRODUTO.PRODUTO_ID = :id"
         );
-        $stmt -> bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt -> bindParam(':nome', $nome, PDO::PARAM_STR);
-        $stmt -> bindParam(':descricao', $descricao, PDO::PARAM_STR);
-        $stmt -> bindParam(':preco', $preco, PDO::PARAM_STR);
-        $stmt -> bindParam(':desconto', $desconto, PDO::PARAM_STR);
-        $stmt -> bindParam(':ativo', $ativo, PDO::PARAM_INT);
-        $stmt -> bindParam(':categoria', $categoria, PDO::PARAM_INT);
-        $stmt -> bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
-        $stmt -> execute();
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
+        $stmt->bindParam(':desconto', $desconto, PDO::PARAM_STR);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
+        $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
+        $stmt->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
+        $stmt->execute();
+
+        foreach ($imagem_urls as $index => $url) {
+            $ordem = $imagem_ordens[$index];
+            $sql_imagem = "UPDATE produto_imagem SET imagem_url = :url_imagem, imagem_ordem = :ordem_imagem WHERE produto_id = :id";
+            $stmt_imagem = $pdo->prepare($sql_imagem);
+            $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
+            $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
+            $stmt_imagem->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt_imagem->execute();
+        }
+
         header('Location: ../index.php');
         exit();
-    } catch(PDOException $e) {
-        echo "Erro: " . $e -> getMessage();
+    } catch (PDOException $e) {
+        echo "Erro: " . $e->getMessage();
     }
 }
-?>

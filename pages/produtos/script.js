@@ -1,6 +1,8 @@
 const hamBurger = document.querySelector(".toggle-btn");
 const btn_close_modal = document.querySelector(".btn_close_modal");
+const btn_close_modal_edit = document.querySelector(".btn_close_modal_edit");
 
+const editIDInput = document.querySelector("#editIdInput");
 const inputNameEdit = document.querySelector("#editNameInput");
 const inputDescEdit = document.querySelector("#editDescInput");
 const inputPrecoEdit = document.querySelector("#editPrecoInput");
@@ -30,6 +32,10 @@ btn_close_modal.addEventListener("click", () => {
 	container_images.innerHTML = "";
 });
 
+btn_close_modal_edit.addEventListener("click", () => {
+	tab_images.innerHTML = "";
+});
+
 hamBurger.addEventListener("click", function () {
 	document.querySelector("#sidebar").classList.toggle("expand");
 });
@@ -37,6 +43,7 @@ hamBurger.addEventListener("click", function () {
 async function editarProduto(id) {
 	const data = await fetch(`actions/pegarPorId.php?id=${id}`);
 	const { erro, dados } = await data.json();
+	editIDInput.value = dados[0].produto_id;
 	inputNameEdit.value = dados[0].produto_nome;
 	inputDescEdit.value = dados[0].produto_desc;
 	inputPrecoEdit.value = dados[0].produto_preco;
@@ -59,7 +66,7 @@ async function editarProduto(id) {
 		tab_images.innerHTML += `
         <div class="mb-3 mt-3">
         <label for="exampleFormControlInput1" class="form-label">ID Imagem</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value= "${image.id}" />
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_id[]" value= "${image.id}" />
         </div>
         <div class="mb-3 mt-3">
             <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
