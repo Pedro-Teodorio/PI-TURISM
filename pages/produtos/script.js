@@ -59,15 +59,15 @@ async function editarProduto(id) {
 	let images = [];
 
 	dados.forEach((dado) => {
-		images.push({id: dado.imagem_id, url: dado.imagem_url, ordem: dado.imagem_ordem });
+		images.push({ id: dado.imagem_id, url: dado.imagem_url, ordem: dado.imagem_ordem });
 	});
 
 	images.forEach((image) => {
 		tab_images.innerHTML += `
-        <div class="mb-3 mt-3">
-        <label for="exampleFormControlInput1" class="form-label">ID Imagem</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_id[]" value= "${image.id}" />
-        </div>
+       
+      
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_id[]" value= "${image.id}" hidden />
+   
         <div class="mb-3 mt-3">
             <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value= "${image.url}" />

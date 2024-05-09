@@ -167,7 +167,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
     </div>
 
-    <div class="modal fade " id="produtoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade " id="produtoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-first">
@@ -283,7 +284,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         </div>
     </div>
 
-    <div class="modal fade " id="produtoModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade " id="produtoModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-first">
@@ -311,7 +313,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                             <div class="tab-pane fade show active" id="tabEdit1" role="tabpanel"
                                 aria-labelledby="tab1-tab">
                                 <div class="mb-3 mt-3">
-                                <input type="text" class="form-control" id="editIdInput" placeholder="Digite o nome do produto" name="id"/>
+                                    <input type="text" class="form-control" id="editIdInput"
+                                        placeholder="Digite o nome do produto" name="id" hidden />
                                     <label for="exampleFormControlInput1" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="editNameInput"
                                         placeholder="Digite o nome do produto" name="nome" />
@@ -372,7 +375,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                             <!-- Add more tab content as needed -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn_close_modal_edit" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-secondary btn_close_modal_edit"
+                                data-bs-dismiss="modal">
                                 Close
                             </button>
                             <button type="submit" class="btn btn-primary">Save changes</button>

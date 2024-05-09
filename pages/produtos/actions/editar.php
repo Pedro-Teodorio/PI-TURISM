@@ -42,11 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         foreach ($imagem_urls as $index => $url) {
             $ordem = $imagem_ordens[$index];
-            $sql_imagem = "UPDATE produto_imagem SET imagem_url = :url_imagem, imagem_ordem = :ordem_imagem WHERE produto_id = :id";
+            $ids = $imagem_ids[$index];
+            $sql_imagem = "UPDATE produto_imagem SET imagem_url = :url_imagem, imagem_ordem = :ordem_imagem WHERE produto_id = :id AND imagem_id = :imagem_id";
             $stmt_imagem = $pdo->prepare($sql_imagem);
             $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
             $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
             $stmt_imagem->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt_imagem->bindParam(':imagem_id', $ids, PDO::PARAM_INT);
             $stmt_imagem->execute();
         }
 
