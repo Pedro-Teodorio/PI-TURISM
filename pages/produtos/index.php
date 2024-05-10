@@ -38,12 +38,14 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 </div>
             </div>
             <ul class="sidebar-nav">
+                <!--
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Perfil</span>
                     </a>
                 </li>
+                -->
                 <li class="sidebar-item">
                     <a href="../administradores/index.php" class="sidebar-link">
                         <i class="lni lni-network"></i>
