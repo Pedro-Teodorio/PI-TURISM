@@ -1,5 +1,9 @@
 <?php
 session_start(); // Inicia a sessão
+require_once("../../utils/database/dbConnect.php");
+require_once("../categoria/actions/listar.php");
+require_once("actions/listar.php");
+
 if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não existir, redireciona para a página de login
   header("Location: index.php"); // Redireciona para a página de login
   exit(); // Encerra o script
@@ -147,23 +151,29 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
         <div class="card-body">
           <table class="table table-hover text-center border ">
             <caption class="caption-top fs-5 text-black-50">
-              Ultimos produtos adicionados
+              10 produtos ativos com maior quantidade em estoque
             </caption>
             <thead class="table-head-color">
-              <th scope="col">#</th>
+              <th scope="col">Ranking</th>
+              <th scope="col">ID</th>
               <th scope="col">Nome</th>
-              <th scope="col">Imagem</th>
-              <th scope="col">Detalhes</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Quantidade</th>
             </thead>
             <tbody>
+            <?php foreach (listarProdutosAltoEstoque() as $produto) { ?>
               <tr class="vertical-align">
-                <td>1</td>
-                <td>Bolo</td>
-                <td>Imagem de Bolo</td>
-                <td>
-                  <a href="#"><i class="lni lni-eye bg-color-logo text-light p-2 rounded-1 fs-3"></i></a>
-                </td>
+                <td><?= $produto['ranking']; ?></td>
+                <td><?= $produto['produto_id']; ?></td>
+                <td><?= $produto['produto_nome']; ?></td>
+                <td><?= $produto['categoria_nome']; ?></td>
+                <td><?= $produto['produto_desc']; ?></td>
+                <td><?= $produto['produto_preco']; ?></td>
+                <td><?= $produto['produto_qtd']; ?></td>
               </tr>
+              <!--
               <tr class="vertical-align">
                 <td>2</td>
                 <td>Pizza</td>
@@ -196,7 +206,8 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                   <a href="#"><i class="lni lni-eye bg-color-logo text-light p-2 rounded-1 fs-3"></i></a>
                 </td>
               </tr>
-
+              -->
+              <?php } ?>
             </tbody>
           </table>
         </div>
