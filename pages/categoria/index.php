@@ -155,7 +155,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
             <div class="modal-body">
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" required>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome da categoria" name="nome" required>
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>

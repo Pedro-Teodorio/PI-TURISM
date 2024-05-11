@@ -236,7 +236,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                         <label for="exampleFormControlInput1" class="form-label">Quantidade de
                                             Produto</label>
                                         <input type="number" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Digite o desconto" name="quantidade" step="0.01" />
+                                            placeholder="Digite a quantidade" name="quantidade" step="0.01" />
                                     </div>
                                 </div>
                                 <div class="mb-3"></div>
