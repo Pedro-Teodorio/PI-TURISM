@@ -5,14 +5,9 @@ function contadorDeCategoriasAtivas()
     try {
         $stmt = $pdo->prepare(
             "SELECT
-                COUNT( DISTINCT( categoria_id ) ) AS categorias_ativas
-
-            FROM produto
-
-                INNER JOIN categoria
-                    USING(categoria_id)
-                
-            WHERE produto.produto_ativo = 1"
+                COUNT( DISTINCT( CATEGORIA_ID ) ) AS categorias_ativas
+            FROM CATEGORIA
+            WHERE CATEGORIA_ATIVO = 1"
         );
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

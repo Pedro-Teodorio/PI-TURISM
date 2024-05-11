@@ -12,8 +12,8 @@ function listarProdutos()
               , produto.produto_desconto
               , produto.produto_ativo
               , categoria.categoria_nome
-              , produto_imagem.imagem_url
-              , produto_imagem.imagem_ordem
+              , GROUP_CONCAT( produto_imagem.imagem_url ) AS imagem_url
+              , GROUP_CONCAT( produto_imagem.imagem_ordem ) AS imagem_ordem
               , COALESCE(produto_estoque.produto_qtd,0) AS produto_qtd
     
             FROM produto
@@ -26,6 +26,16 @@ function listarProdutos()
                 
                 LEFT JOIN produto_estoque
                     USING(produto_id)
+            
+            GROUP BY
+                1
+              , 2
+              , 3
+              , 4
+              , 5
+              , 6
+              , 7
+              , 10
                     
             ORDER BY
                 produto.produto_id
