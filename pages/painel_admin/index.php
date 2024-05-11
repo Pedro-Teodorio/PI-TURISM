@@ -3,6 +3,10 @@ session_start(); // Inicia a sessão
 require_once("../../utils/database/dbConnect.php");
 require_once("../categoria/actions/listar.php");
 require_once("actions/listar.php");
+require_once("actions/produtosAtivos.php");
+require_once("actions/produtosEmEstoque.php");
+require_once("actions/categoriasAtivas.php");
+require_once("actions/administradoresAtivos.php");
 
 if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não existir, redireciona para a página de login
   header("Location: index.php"); // Redireciona para a página de login
@@ -86,7 +90,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <p class="card-text mb-0">
                   <strong>Produtos Ativos :</strong>
                 </p>
-                <h4 class="mb-0">45</h4>
+                <?php foreach (contadorDeProdutosAtivos() as $ativo) { ?>
+                  <h4 class="mb-0"><?= $ativo['produtos_ativos']; ?></h4>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -104,7 +110,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <p class="card-text mb-0">
                   <strong>Produtos em estoque :</strong>
                 </p>
-                <h4 class="mb-0">125</h4>
+                <?php foreach (contadorDeProdutosEmEstoque() as $estoque) { ?>
+                  <h4 class="mb-0"><?= $estoque['produtos_em_estoque']; ?></h4>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -122,7 +130,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <p class="card-text mb-0">
                   <strong>Categorias Ativas :</strong>
                 </p>
-                <h4 class="mb-0">5</h4>
+                <?php foreach (contadorDeCategoriasAtivas() as $categoria) { ?>
+                  <h4 class="mb-0"><?= $categoria['categorias_ativas']; ?></h4>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -140,7 +150,9 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 <p class="card-text mb-0">
                   <strong>Administradores Ativos :</strong>
                 </p>
-                <h4 class="mb-0">7</h4>
+                <?php foreach (contadorDeAdministradoresAtivos() as $administrador) { ?>
+                  <h4 class="mb-0"><?= $administrador['administradores_ativos']; ?></h4>
+                <?php } ?>
               </div>
             </div>
           </div>
