@@ -19,4 +19,3 @@ if ($query->rowCount() == 1) { // Se a query retornar 1 linha, significa que o u
 } else {
     header("Location: ../index.php?error"); // Redireciona para a página de login com uma mensagem de erro
 }
-?>

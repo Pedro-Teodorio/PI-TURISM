@@ -68,7 +68,8 @@ require_once ("actions/listar.php")
           <span>Logout</span>
         </a>
       </div>
-    </aside>
+  </aside>
+  
     <div class="main p-3 d-flex flex-column">
       <h1>Administradores</h1>
 

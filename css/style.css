@@ -87,10 +87,7 @@ body {
     transition: 0.3s;
     font-weight: 900;
 }
-/* 
-#btn_login:hover {
-    background-color: #0D9ED3;
-} */
+
 
 #card_form form p {
     color: red;
