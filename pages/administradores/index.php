@@ -36,12 +36,14 @@ require_once ("actions/listar.php")
         </div>
       </div>
       <ul class="sidebar-nav">
+        <!--
         <li class="sidebar-item">
           <a href="#" class="sidebar-link">
             <i class="lni lni-user"></i>
             <span>Perfil</span>
           </a>
         </li>
+        -->
         <li class="sidebar-item">
           <a href="#" class="sidebar-link">
             <i class="lni lni-network"></i>
@@ -77,7 +79,7 @@ require_once ("actions/listar.php")
         <div class="card-body">
           <div class="mb-2">
             <label for="exampleFormControlInput1" class="form-label">Pesquisar</label>
-            <input type="text" class="form-control w-45" id="searchInput" placeholder="Digite o nome da categoria" />
+            <input type="text" class="form-control w-45" id="searchInput" placeholder="Digite o nome do administrador" />
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />

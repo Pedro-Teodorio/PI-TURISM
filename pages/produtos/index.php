@@ -38,12 +38,14 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                 </div>
             </div>
             <ul class="sidebar-nav">
+                <!--
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Perfil</span>
                     </a>
                 </li>
+                -->
                 <li class="sidebar-item">
                     <a href="../administradores/index.php" class="sidebar-link">
                         <i class="lni lni-network"></i>
@@ -234,7 +236,7 @@ if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não exist
                                         <label for="exampleFormControlInput1" class="form-label">Quantidade de
                                             Produto</label>
                                         <input type="number" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Digite o desconto" name="quantidade" step="0.01" />
+                                            placeholder="Digite a quantidade" name="quantidade" step="0.01" />
                                     </div>
                                 </div>
                                 <div class="mb-3"></div>

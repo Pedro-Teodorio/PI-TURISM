@@ -1,19 +1,16 @@
 <?php
-function listarProdutos()
+function listarProdutosAltoEstoque()
 {
     require("../../utils/database/dbConnect.php");
     try {
         $stmt = $pdo->prepare(
             "SELECT
-                produto.produto_id
+                ROW_NUMBER() OVER(ORDER BY COALESCE(produto_estoque.produto_qtd,0) DESC ) AS ranking
+              , produto.produto_id
               , produto.produto_nome
               , produto.produto_desc
-              , produto.produto_preco
-              , produto.produto_desconto
-              , produto.produto_ativo
               , categoria.categoria_nome
-              , GROUP_CONCAT( produto_imagem.imagem_url ) AS imagem_url
-              , GROUP_CONCAT( produto_imagem.imagem_ordem ) AS imagem_ordem
+              , produto.produto_preco
               , COALESCE(produto_estoque.produto_qtd,0) AS produto_qtd
     
             FROM produto
@@ -21,25 +18,15 @@ function listarProdutos()
                 INNER JOIN categoria
                     USING(categoria_id)
                 
-                LEFT JOIN produto_imagem
-                    USING(produto_id)
-                
                 LEFT JOIN produto_estoque
                     USING(produto_id)
-            
-            GROUP BY
-                1
-              , 2
-              , 3
-              , 4
-              , 5
-              , 6
-              , 7
-              , 10
+                
+            WHERE produto.produto_ativo = 1
                     
             ORDER BY
-                produto.produto_id
-              , produto_imagem.imagem_ordem"
+                1
+            
+            LIMIT 10"
         );
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
