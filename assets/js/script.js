@@ -99,11 +99,42 @@ async function editarAdministrador(id) {
     editCheck.checked = false;
   }
 }
-
 function deletarAdministrador(id) {
   const deleteIdInput = document.querySelector("#deleteIdInput");
   deleteIdInput.value = id;
 }
+function verifySearchRadioAdmin() {
+	let btn_search_admin = document.querySelector(".btn-search-admin");
+  
+	btn_search_admin.addEventListener("click", () => {
+	  const searchInput = document.querySelector("#searchInput");
+	  const searchValue = searchInput.value;
+	  const searchRadio = document.querySelector(
+		".input-check-admin:checked"
+	  ).value;
+	  if (!searchValue === "") {
+		alert("O campo de busca não pode ser vazio!");
+		return;
+	  } else {
+		if (searchRadio === "Todos") {
+		  table_admins.innerHTML = "";
+		  listAllAdmins();
+  
+		  return;
+		}
+		if (searchRadio === "Ativos") {
+		  table_admins.innerHTML = "";
+		  listAdminsAtivos();
+		  return;
+		}
+		if (searchRadio === "Inativos") {
+		  table_admins.innerHTML = "";
+		  listAdminsInativos();
+		  return;
+		}
+	  }
+	});
+  }
 //#endregion
 
 //#region Scripts for Categorias Dashboard
@@ -158,6 +189,7 @@ function deletarCategoria(id) {
 function main() {
 	hamBurger.addEventListener("click", toggleSidebar);
 	listAllAdmins();
+	verifySearchRadioAdmin()
 	listAllCategorias();
 }
 
