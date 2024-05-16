@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ativo = isset($_POST['ativo']) ? 1 : 0;
 
     try {
-        $sql = "UPDATE administrador SET  ADM_NOME = :nome, ADM_SENHA = :senha, ADM_EMAIL = :email ,  ADM_ATIVO = :ativo WHERE ADM_ID = :id";
+        $sql = "UPDATE ADMINISTRADOR SET  ADM_NOME = :nome, ADM_SENHA = :senha, ADM_EMAIL = :email ,  ADM_ATIVO = :ativo WHERE ADM_ID = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);

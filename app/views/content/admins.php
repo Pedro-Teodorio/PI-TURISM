@@ -7,20 +7,22 @@
                 <label for="exampleFormControlInput1" class="form-label">Pesquisar</label>
                 <input type="text" class="form-control w-45" id="searchInput" placeholder="Digite o nome do administrador" />
             </div>
+
+
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                <label class="form-check-label" for="inlineCheckbox1">Todos</label>
+                <input class="form-check-input input-check-admin" type="radio" name="inlineRadioOptions" id="radioTodos" value="Todos" checked>
+                <label class="form-check-label" for="radioTodos">Todos</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                <label class="form-check-label" for="inlineCheckbox2">Ativos</label>
+                <input class="form-check-input input-check-admin"  type="radio" name="inlineRadioOptions" id="radioAtivo" value="Ativos">
+                <label class="form-check-label" for="radioAtivo">Ativos</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                <label class="form-check-label" for="inlineCheckbox2">Inativos</label>
+                <input class="form-check-input input-check-admin" type="radio" name="inlineRadioOptions" id="radioInativos" value="Inativos">
+                <label class="form-check-label" for="radioInativos">Inativos</label>
             </div>
 
-            <a href="#" class="btn btn-success border-0">Buscar</a>
+            <button class="btn btn-success border-0 btn-search-admin">Buscar</button>
 
         </div>
     </div>
@@ -142,18 +144,18 @@
             <div class="modal-header bg-first">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Administrador</h1>
             </div>
-            
-                <form action="../../app/helpers/admin/excluir.php" method="post">
-                    <div class="modal-body text-center pb-0">
-                        <p class="fs-5 fw-bold">Deseja realmente excluir o administrador?</p>
-                        <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Excluir</button>
-                    </div>
-                </form>
-            
+
+            <form action="../../app/helpers/admin/excluir.php" method="post">
+                <div class="modal-body text-center pb-0">
+                    <p class="fs-5 fw-bold">Deseja realmente excluir o administrador?</p>
+                    <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Excluir</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
