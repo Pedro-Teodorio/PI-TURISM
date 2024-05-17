@@ -160,3 +160,4 @@
     </div>
 </div>
 <!-- Fim do Modal excluir Administrador -->
+<script src="../../assets/js/admin.js"></script>

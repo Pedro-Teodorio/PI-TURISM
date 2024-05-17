@@ -24,6 +24,8 @@ try {
                 
                 LEFT JOIN PRODUTO_ESTOQUE
                     USING(PRODUTO_ID)
+                    
+            WHERE PRODUTO.PRODUTO_ATIVO = 0
             
             GROUP BY
                 1
@@ -37,7 +39,9 @@ try {
                     
             ORDER BY
                 PRODUTO.PRODUTO_ID
-              , PRODUTO_IMAGEM.IMAGEM_ORDEM"
+              , PRODUTO_IMAGEM.IMAGEM_ORDEM;
+              
+              "
     );
     $stmt->execute();
     $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);

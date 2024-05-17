@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_logado'])) { // Se a variável de sessão não existir, redireciona para a página de login
-    header("Location: index.php"); // Redireciona para a página de login
+    header("Location: ../../index.php"); // Redireciona para a página de login
     exit(); // Encerra o script
 }
 
