@@ -107,27 +107,31 @@ function verifySearchRadioAdmin() {
 	  const searchRadio = document.querySelector(
 		".input-check-admin:checked"
 	  ).value;
-	  if (!searchValue === "") {
-		alert("O campo de busca não pode ser vazio!");
-		return;
-	  } else {
+
+	  
+	  if(!searchInput.value == "") {
+		alert(`Você pesquisou por: ${searchValue}`)
+		searchInput.value = "";
+	  }else{
 		if (searchRadio === "Todos") {
-		  table_admins.innerHTML = "";
-		  listAllAdmins();
-  
-		  return;
-		}
-		if (searchRadio === "Ativos") {
-		  table_admins.innerHTML = "";
-		  listAdminsAtivos();
-		  return;
-		}
-		if (searchRadio === "Inativos") {
-		  table_admins.innerHTML = "";
-		  listAdminsInativos();
-		  return;
+			table_admins.innerHTML = "";
+			listAllAdmins();
+	
+			return;
+		  }
+		  if (searchRadio === "Ativos") {
+			table_admins.innerHTML = "";
+			listAdminsAtivos();
+			return;
+		  }
+		  if (searchRadio === "Inativos") {
+			table_admins.innerHTML = "";
+			listAdminsInativos();
+			return;
+		  
 		}
 	  }
+		
 	});
   }
 //#endregion
