@@ -1,9 +1,3 @@
-<!--
-<div class="container">
-    <h1>Essa vai ser a pagina de categorias</h1>
-</div>
--->
-
 <div class="container pt-3">
     <h1>Categorias</h1>
     <div class="card border-first">
@@ -133,16 +127,16 @@
 <!-- Fim do Modal editar Categoria -->
 
 <!-- Modal excluir Categoria -->
-<div class="modal fade" id="adminModalDelete" tabindex="-1" aria-labelledby="adminModalDeleteLabel" aria-hidden="true">
+<div class="modal fade" id="categoriaModalDelete" tabindex="-1" aria-labelledby="categoriaModalDeleteLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-first">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Administrador</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Categoria</h1>
             </div>
             
-                <form action="../../app/helpers/admin/excluir.php" method="post">
+                <form action="../../app/helpers/categorias/excluir.php" method="post">
                     <div class="modal-body text-center pb-0">
-                        <p class="fs-5 fw-bold">Deseja realmente excluir o administrador?</p>
+                        <p class="fs-5 fw-bold">Deseja realmente excluir a categoria?</p>
                         <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                     </div>
                     <div class="modal-footer">

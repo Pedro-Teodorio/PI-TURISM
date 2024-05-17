@@ -186,11 +186,65 @@ function deletarCategoria(id) {
 }
 //#endregion
 
+//#region Scripts for Produtos Dashboard
+const link_produto = document.querySelector("#link_produto");
+const table_produto = document.querySelector("#table-produto");
+
+async function listAllProdutos() {
+	const data = await fetch(`../../app/helpers/produtos/listar.php`);
+	const { erro, dados } = await data.json();
+	dados.forEach((produto) => {
+		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD } = produto;
+		const tr = document.createElement("tr");
+		let status = PRODUTO_ATIVO === 1 ? "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>" : "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
+		tr.innerHTML = `
+			<td>${PRODUTO_ID}</td>
+			<td>${PRODUTO_NOME}</td>
+			<td>${PRODUTO_DESC}</td>
+			<td>${PRODUTO_PRECO}</td>
+			<td>${PRODUTO_DESCONTO}</td>
+			<td>${CATEGORIA_NOME}</td>
+			<td>${status}</td>
+			<td>${PRODUTO_QTD}</td>
+			<td>
+			<button data-bs-toggle="modal" data-bs-target="#produtoModalEdit" onclick="editarProduto(${PRODUTO_ID})" class="btn btn-first-color"><i class="bi bi-pencil-square"></i></button>
+			<button data-bs-toggle="modal" data-bs-target="#produtoModalDelete" onclick="deletarProduto(${PRODUTO_ID})"  class="btn btn-first-color"><i class="bi bi-trash"></i></button>
+			</td>
+		`;
+		table_produto.appendChild(tr);
+	});
+}
+
+async function editarProduto(id) {
+	const editIdInput = document.querySelector("#editIdInput");
+	const editNameInput = document.querySelector("#editNameInput");
+	const editDescricaoInput = document.querySelector("#editDescricaoInput");
+	const editCheck = document.querySelector("#editCheck");
+	const data = await fetch(`../../app/helpers/categorias/pegar_por_id.php?id=${id}`);
+	const { erro, dados } = await data.json();
+
+	editIdInput.value = dados.CATEGORIA_ID;
+	editNameInput.value = dados.CATEGORIA_NOME;
+	editDescricaoInput.value = dados.CATEGORIA_DESC;
+	if (dados.CATEGORIA_ATIVO == 1) {
+		editCheck.checked = true;
+	} else {
+		editCheck.checked = false;
+	}
+}
+
+function deletarCategoria(id) {
+	const deleteIdInput = document.querySelector("#deleteIdInput");
+	deleteIdInput.value = id;
+}
+//#endregion
+
 function main() {
 	hamBurger.addEventListener("click", toggleSidebar);
 	listAllAdmins();
-	verifySearchRadioAdmin()
+	// verifySearchRadioAdmin()
 	listAllCategorias();
+	listAllProdutos();
 }
 
 main();

@@ -1,13 +1,3 @@
-<div class="container">
-    <h1>Essa vai ser a pagina de produtos</h1>
-</div>
-
-<!--
-<div class="container">
-    <h1>Essa vai ser a pagina de categorias</h1>
-</div>
--->
-
 <div class="container pt-3">
     <h1>Produtos</h1>
     <div class="card border-first">
@@ -37,7 +27,7 @@
     <div class="card mt-4 mb-4 rounded-3 border-first">
         <div class="card-header bg-first">Lista de Produtos</div>
         <div class="card-body">
-            <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#categoriaModal">
+            <button type="button" class="btn btn-first-color mb-3 ps-2" data-bs-toggle="modal" data-bs-target="#produtoModal">
                 <i class="bi bi-plus-lg"></i>
                 Nova
             </button>
@@ -49,8 +39,9 @@
                     <th scope="col">Descrição</th>
                     <th scope="col">Preço</th>
                     <th scope="col">Desconto</th>
-                    <th scope="col">Id Categoria</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Ativo</th>
+                    <th scope="col">Estoque</th>
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody id="table-produto">
@@ -62,15 +53,15 @@
 
 </div>
 
-<!-- Modal adicionar Produto -->
+<!-- Modal adicionar Categoria -->
 <div class="modal fade" id="categoriaModal" tabindex="-1" aria-labelledby="categoriaModalLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-first">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Produto</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Categoria</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/produtos/cadastrar.php" method="post">
+                <form action="../../app/helpers/categorias/cadastrar.php" method="post">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -78,20 +69,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="descricaoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
-                        </div> <!-- Trocar o input de descrição por textarea -->
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Preço</label>
-                            <input type="number" class="form-control" id="precoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">ID Categoria</label>
-                            <input type="number" class="form-control" id="idCategoriaInput" placeholder="Digite a descrição da categoria" name="descricao" required>
+                            <input type="descricao" class="form-control" id="descricaoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="ativo" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Produto Ativo
+                                Categoria Ativa
                             </label>
                         </div>
                     </div>
@@ -104,18 +87,18 @@
         </div>
     </div>
 </div>
-<!-- Fim do Modal adicionar Produto -->
+<!-- Fim do Modal adicionar Categoria -->
 
-<!-- Modal editar Produto -->
+<!-- Modal editar Categoria -->
 
 <div class="modal fade" id="categoriaModalEdit" tabindex="-1" aria-labelledby="categoriaModalEditLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-first">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Produto</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/produtos/editar.php" method="post">
+                <form action="../../app/helpers/categorias/editar.php" method="post">
                     <div class="modal-body">
                         <div class="mb-3">
 
@@ -127,20 +110,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="editDescricaoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
-                        </div> <!-- Trocar o input de descrição por textarea -->
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Preço</label>
-                            <input type="number" class="form-control" id="editPrecoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">ID Categoria</label>
-                            <input type="number" class="form-control" id="editIdCategoriaInput" placeholder="Digite a descrição da categoria" name="descricao" required>
+                            <textarea class="form-control" id="editDescricaoInput" placeholder="Digite a descricao da categoria" name="descricao" required></textarea>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="ativo" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="ativo" id="editCheck">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Produto Ativo
+                                Categoria Ativa
                             </label>
                         </div>
                     </div>
@@ -153,19 +128,19 @@
         </div>
     </div>
 </div>
-<!-- Fim do Modal editar Produto -->
+<!-- Fim do Modal editar Categoria -->
 
-<!-- Modal excluir Produto -->
-<div class="modal fade" id="adminModalDelete" tabindex="-1" aria-labelledby="adminModalDeleteLabel" aria-hidden="true">
+<!-- Modal excluir Categoria -->
+<div class="modal fade" id="categoriaModalDelete" tabindex="-1" aria-labelledby="categoriaModalDeleteLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-first">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Administrador</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Categoria</h1>
             </div>
             
-                <form action="../../app/helpers/produtos/excluir.php" method="post">
+                <form action="../../app/helpers/categorias/excluir.php" method="post">
                     <div class="modal-body text-center pb-0">
-                        <p class="fs-5 fw-bold">Deseja realmente excluir o administrador?</p>
+                        <p class="fs-5 fw-bold">Deseja realmente excluir a categoria?</p>
                         <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                     </div>
                     <div class="modal-footer">
@@ -177,4 +152,3 @@
         </div>
     </div>
 </div>
-<!-- Fim do Modal excluir Administrador -->
