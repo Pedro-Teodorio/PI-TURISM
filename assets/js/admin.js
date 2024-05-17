@@ -98,6 +98,12 @@ function deletarAdministrador(id) {
   const deleteIdInput = document.querySelector("#deleteIdInput");
   deleteIdInput.value = id;
 }
+
+async function listSearchAdmin(admin){
+	const data = await fetch(`../../app/helpers/admin/listar_por_pesquisa.php?nome=t`)
+	const { erro, dados } = await data.json();
+	console.log(dados);
+}
 function verifySearchRadioAdmin() {
 	let btn_search_admin = document.querySelector(".btn-search-admin");
   
@@ -109,10 +115,7 @@ function verifySearchRadioAdmin() {
 	  ).value;
 
 	  
-	  if(!searchInput.value == "") {
-		alert(`Você pesquisou por: ${searchValue}`)
-		searchInput.value = "";
-	  }else{
+	  if(searchValue.length === 0) {
 		if (searchRadio === "Todos") {
 			table_admins.innerHTML = "";
 			listAllAdmins();
@@ -130,7 +133,13 @@ function verifySearchRadioAdmin() {
 			return;
 		  
 		}
-	  }
+	  }else{
+		if (searchRadio === "Todos" && searchValue.length > 0) {
+			
+			return;
+		  }
+		}
+	  
 		
 	});
   }
@@ -138,3 +147,4 @@ function verifySearchRadioAdmin() {
 
 listAllAdmins();
 verifySearchRadioAdmin();
+listSearchAdmin();
