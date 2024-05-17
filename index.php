@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <main class="container-fluid d-flex justify-content-center align-items-center w-100 vh-100">
         <div class="card mb-3 shadow border-0 rounded-5" style="max-width: 1024px;">
             <div class="row">
