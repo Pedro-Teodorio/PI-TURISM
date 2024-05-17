@@ -11,6 +11,8 @@ try {
           , CATEGORIA.CATEGORIA_NOME
           , PRODUTO.PRODUTO_ATIVO
           , PRODUTO_ESTOQUE.PRODUTO_QTD
+          , PRODUTO_IMAGEM.IMAGEM_URL
+          , PRODUTO_IMAGEM.IMAGEM_ORDEM
 
         FROM PRODUTO
 
@@ -19,6 +21,13 @@ try {
             
             INNER JOIN PRODUTO_ESTOQUE
                 USING(PRODUTO_ID)
+            
+            INNER JOIN PRODUTO_IMAGEM
+                USING(PRODUTO_ID)
+
+        ORDER BY
+            PRODUTO.PRODUTO_ID
+          , PRODUTO_IMAGEM.IMAGEM_ORDEM
     ";
     $stament = $pdo->prepare($sql); // Prepara a query
     $stament->execute(); // Executa a query
