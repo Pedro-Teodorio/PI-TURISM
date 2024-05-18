@@ -1,8 +1,9 @@
 const link_categoria = document.querySelector("#link_categoria");
 const table_categoria = document.querySelector("#table-categoria");
 
-async function listAllCategorias() {
-	const data = await fetch(`../../app/helpers/categorias/listar.php`);
+async function listAllCategorias(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar.php" : `../../app/helpers/categorias/listar.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
@@ -21,10 +22,10 @@ async function listAllCategorias() {
 		table_categoria.appendChild(tr);
 	});
 }
-async function listCategoriasAtivas() {
-	const data = await fetch(`../../app/helpers/categorias/listar_categorias_ativas.php`);
+async function listCategoriasAtivas(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar_categorias_ativas.php" : `../../app/helpers/categorias/listar_categorias_ativas.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
-	console.log(dados);
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
 		const tr = document.createElement("tr");
@@ -42,8 +43,9 @@ async function listCategoriasAtivas() {
 		table_categoria.appendChild(tr);
 	});
 }
-async function listCategoriasInativas() {
-	const data = await fetch(`../../app/helpers/categorias/listar_categorias_inativas.php`);
+async function listCategoriasInativas(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar_categorias_inativas.php" : `../../app/helpers/categorias/listar_categorias_inativas.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
@@ -87,35 +89,47 @@ function deletarCategoria(id) {
 
 function verifySearchRadioCategorias() {
 	let btn_search_admin = document.querySelector(".btn-search-admin");
-  
-	btn_search_admin.addEventListener("click", () => {
-	  const searchInput = document.querySelector("#searchInput");
-	  const searchValue = searchInput.value;
-	  const searchRadio = document.querySelector(
-		".input-check-admin:checked"
-	  ).value;
-	  if (!searchValue === "") {
-		alert("O campo de busca não pode ser vazio!");
-		return;
-	  } else {
-		if (searchRadio === "Todos") {
-			table_categoria.innerHTML = "";
-		  	listAllCategorias();
-		  return;
-		}
-		if (searchRadio === "Ativos") {
-			table_categoria.innerHTML = "";
-		  	listCategoriasAtivas();
-		  return;
-		}
-		if (searchRadio === "Inativos") {
-			table_categoria.innerHTML = "";
-		  listCategoriasInativas();
-		  return;
-		}
-	  }
-	});
-  }
 
-listAllCategorias();
+	btn_search_admin.addEventListener("click", () => {
+		const searchInput = document.querySelector("#searchInput");
+		const searchValue = searchInput.value;
+		const searchRadio = document.querySelector(".input-check-admin:checked").value;
+		if (searchValue.length === 0) {
+			if (searchRadio === "Todos") {
+				table_categoria.innerHTML = "";
+				listAllCategorias("");
+
+				return;
+			}
+			if (searchRadio === "Ativos") {
+				table_categoria.innerHTML = "";
+				listCategoriasAtivas("");
+				return;
+			}
+			if (searchRadio === "Inativos") {
+				table_categoria.innerHTML = "";
+				listCategoriasInativas("");
+				return;
+			}
+		} else {
+			if (searchRadio === "Ativos" && searchValue.length > 0) {
+				table_categoria.innerHTML = "";
+				listCategoriasAtivas(searchValue);
+				return;
+			}
+			if (searchRadio === "Inativos" && searchValue.length > 0) {
+				table_categoria.innerHTML = "";
+				listCategoriasInativas(searchValue);
+				return;
+			}
+			if (searchRadio === "Todos" && searchValue.length > 0) {
+				table_categoria.innerHTML = "";
+				listAllCategorias(searchValue);
+				return;
+			}
+		}
+	});
+}
+
+listAllCategorias("");
 verifySearchRadioCategorias()
