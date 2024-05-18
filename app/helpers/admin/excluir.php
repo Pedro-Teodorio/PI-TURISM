@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     
     try {
-        $sql = "DELETE FROM administrador WHERE ADM_ID = :id"; // Query para deletar um produto
+        $sql = "DELETE FROM ADMINISTRADOR WHERE ADM_ID = :id"; // Query para deletar um produto
         $stament = $pdo->prepare($sql); // Prepara a query
         $stament->bindParam(':id', $id, PDO::PARAM_INT); // Adiciona o parâmetro id
         $stament->execute(); // Executa a query

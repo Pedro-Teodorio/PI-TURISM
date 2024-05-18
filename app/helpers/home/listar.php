@@ -5,23 +5,23 @@ function listarProdutosAltoEstoque()
     try {
         $stmt = $pdo->prepare(
             "SELECT
-                ROW_NUMBER() OVER(ORDER BY COALESCE(produto_estoque.produto_qtd,0) DESC ) AS ranking
-              , produto.produto_id
-              , produto.produto_nome
-              , produto.produto_desc
-              , categoria.categoria_nome
-              , produto.produto_preco
-              , COALESCE(produto_estoque.produto_qtd,0) AS produto_qtd
+                ROW_NUMBER() OVER(ORDER BY COALESCE(PRODUTO_ESTOQUE.PRODUTO_QTD,0) DESC ) AS ranking
+              , PRODUTO.PRODUTO_ID
+              , PRODUTO.PRODUTO_NOME
+              , PRODUTO.PRODUTO_DESC
+              , CATEGORIA.CATEGORIA_NOME
+              , PRODUTO.PRODUTO_PRECO
+              , COALESCE(PRODUTO_ESTOQUE.PRODUTO_QTD,0) AS produto_qtd
     
-            FROM produto
+            FROM PRODUTO
     
-                INNER JOIN categoria
-                    USING(categoria_id)
+                INNER JOIN CATEGORIA
+                    USING(CATEGORIA_ID)
                 
-                LEFT JOIN produto_estoque
-                    USING(produto_id)
+                LEFT JOIN PRODUTO_ESTOQUE
+                    USING(PRODUTO_ID)
                 
-            WHERE produto.produto_ativo = 1
+            WHERE PRODUTO.PRODUTO_ATIVO = 1
                     
             ORDER BY
                 1
