@@ -8,6 +8,14 @@ async function listAllProdutos(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar.php" : `../../app/helpers/produtos/listar.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_produto.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto encontrado com esse nome</td>
+		`;
+		table_produto.appendChild(tr);
+	}
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
@@ -45,6 +53,14 @@ async function listProdutosAtivos(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar_produtos_ativos.php" : `../../app/helpers/produtos/listar_produtos_ativos.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_produto.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto ativo encontrado com esse nome</td>
+		`;
+		table_produto.appendChild(tr);
+	}
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
@@ -82,6 +98,14 @@ async function listProdutosInativos(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar_produtos_inativos.php" : `../../app/helpers/produtos/listar_produtos_inativos.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_produto.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto inativo encontrado com esse nome</td>
+		`;
+		table_produto.appendChild(tr);
+	}
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
