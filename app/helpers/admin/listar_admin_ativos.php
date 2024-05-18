@@ -6,7 +6,6 @@ if (!empty($nome)) {
     $params = array("%$nome%");
     $stmt = $pdo->prepare($query);
     $stmt->execute($params);
-
     $admin = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $retorna = ["erro" => false, "dados" => $admin];
 } else {
