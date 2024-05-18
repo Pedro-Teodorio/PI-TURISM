@@ -4,8 +4,9 @@ const btn_close_modal = document.querySelector(".btn_close_modal");
 const btn_close_modal_edit = document.querySelector(".btn_close_modal_edit");
 const tab_images = document.querySelector(".tab-images");
 
-async function listAllProdutos() {
-	const data = await fetch(`../../app/helpers/produtos/listar.php`);
+async function listAllProdutos(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar.php" : `../../app/helpers/produtos/listar.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
@@ -40,8 +41,9 @@ async function listAllProdutos() {
 	});
 }
 
-async function listProdutosAtivos() {
-	const data = await fetch(`../../app/helpers/produtos/listar_produtos_ativos.php`);
+async function listProdutosAtivos(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar_produtos_ativos.php" : `../../app/helpers/produtos/listar_produtos_ativos.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
@@ -76,8 +78,9 @@ async function listProdutosAtivos() {
 	});
 }
 
-async function listProdutosInativos() {
-	const data = await fetch(`../../app/helpers/produtos/listar_produtos_inativos.php`);
+async function listProdutosInativos(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar_produtos_inativos.php" : `../../app/helpers/produtos/listar_produtos_inativos.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((produto) => {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
@@ -233,30 +236,43 @@ function verifySearchRadioProdutos() {
 		const searchInput = document.querySelector("#searchInput");
 		const searchValue = searchInput.value;
 		const searchRadio = document.querySelector(".input-check-admin:checked").value;
-		if (!searchValue === "") {
-			alert("O campo de busca não pode ser vazio!");
-			return;
-		} else {
+		if (searchValue.length === 0) {
 			if (searchRadio === "Todos") {
 				table_produto.innerHTML = "";
-				listAllProdutos();
+				listAllProdutos("");
 				return;
 			}
 			if (searchRadio === "Ativos") {
 				table_produto.innerHTML = "";
-				listProdutosAtivos();
+				listProdutosAtivos("");
 				return;
 			}
 			if (searchRadio === "Inativos") {
 				table_produto.innerHTML = "";
-				listProdutosInativos();
+				listProdutosInativos("");
+				return;
+			}
+		} else {
+			if (searchRadio === "Ativos" && searchValue.length > 0) {
+				table_produto.innerHTML = "";
+				listProdutosAtivos(searchValue);
+				return;
+			}
+			if (searchRadio === "Inativos" && searchValue.length > 0) {
+				table_produto.innerHTML = "";
+				listProdutosInativos(searchValue);
+				return;
+			}
+			if (searchRadio === "Todos" && searchValue.length > 0) {
+				table_produto.innerHTML = "";
+				listAllProdutos(searchValue);
 				return;
 			}
 		}
 	});
 }
 
-listAllProdutos();
+listAllProdutos("");
 loadSelectCategorias();
 loadSelectCategoriasEdit();
 verifySearchRadioProdutos();
