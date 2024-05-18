@@ -90,7 +90,6 @@ function deletarAdministrador(id) {
 	const deleteIdInput = document.querySelector("#deleteIdInput");
 	deleteIdInput.value = id;
 }
-
 function verifySearchRadioAdmin() {
 	let btn_search_admin = document.querySelector(".btn-search-admin");
 
