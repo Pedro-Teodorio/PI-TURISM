@@ -10,7 +10,7 @@ async function listAllAdmins(nome) {
 		table_admins.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="6" class="text-center text-danger fw-bold">Nenhum administrador encontrado</td>
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhum administrador encontrado com esse nome</td>
 		`;
 		table_admins.appendChild(tr);
 		

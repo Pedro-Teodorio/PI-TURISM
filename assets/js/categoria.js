@@ -5,6 +5,14 @@ async function listAllCategorias(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar.php" : `../../app/helpers/categorias/listar.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_categoria.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhuma categoria encontrada com esse nome</td>
+		`;
+		table_categoria.appendChild(tr);
+	}
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
 		const tr = document.createElement("tr");
@@ -26,6 +34,14 @@ async function listCategoriasAtivas(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar_categorias_ativas.php" : `../../app/helpers/categorias/listar_categorias_ativas.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_categoria.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhuma categoria ativa encontrada com esse nome</td>
+		`;
+		table_categoria.appendChild(tr);
+	}
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
 		const tr = document.createElement("tr");
@@ -47,6 +63,14 @@ async function listCategoriasInativas(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/categorias/listar_categorias_inativas.php" : `../../app/helpers/categorias/listar_categorias_inativas.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	if (dados.length === 0) {
+		table_categoria.innerHTML = "";
+		const tr = document.createElement("tr");
+		tr.innerHTML = `
+			<td colspan="6" class="text-center text-danger fw-bold">Nenhuma categoria inativa encontrada com esse nome</td>
+		`;
+		table_categoria.appendChild(tr);
+	}
 	dados.forEach((categoria) => {
 		const { CATEGORIA_ID, CATEGORIA_NOME, CATEGORIA_DESC, CATEGORIA_ATIVO } = categoria;
 		const tr = document.createElement("tr");
