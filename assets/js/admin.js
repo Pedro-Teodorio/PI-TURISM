@@ -2,8 +2,9 @@
 const link_admin = document.querySelector("#link_admin");
 const table_admins = document.querySelector("#table-admins");
 
-async function listAllAdmins() {
-	const data = await fetch(`../../app/helpers/admin/listar.php`);
+async function listAllAdmins(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/admin/listar.php" : `../../app/helpers/admin/listar.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -45,8 +46,9 @@ async function listAdminsAtivos(nome) {
 		table_admins.appendChild(tr);
 	});
 }
-async function listAdminsInativos() {
-	const data = await fetch(`../../app/helpers/admin/listar_admin_inativos.php`);
+async function listAdminsInativos(nome) {
+	let url_vazia = nome === "" ? "../../app/helpers/admin/listar_admin_inativos.php" : `../../app/helpers/admin/listar_admin_inativos.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -100,8 +102,7 @@ function verifySearchRadioAdmin() {
 		if (searchValue.length === 0) {
 			if (searchRadio === "Todos") {
 				table_admins.innerHTML = "";
-				listAllAdmins();
-
+				listAllAdmins("");
 				return;
 			}
 			if (searchRadio === "Ativos") {
@@ -111,20 +112,29 @@ function verifySearchRadioAdmin() {
 			}
 			if (searchRadio === "Inativos") {
 				table_admins.innerHTML = "";
-				listAdminsInativos();
+				listAdminsInativos("");
 				return;
 			}
 		} else {
+			if (searchRadio === "Todos" && searchValue.length > 0) {
+				table_admins.innerHTML = "";
+				listAllAdmins(searchValue);
+				return;
+			}
 			if (searchRadio === "Ativos" && searchValue.length > 0) {
 				table_admins.innerHTML = "";
 				listAdminsAtivos(searchValue);
 				return;
-
+			}
+			if (searchRadio === "Inativos" && searchValue.length > 0) {
+				table_admins.innerHTML = "";
+				listAdminsInativos(searchValue);
+				return;
 			}
 		}
 	});
 }
 //#endregion
 
-listAllAdmins();
+listAllAdmins("");
 verifySearchRadioAdmin();

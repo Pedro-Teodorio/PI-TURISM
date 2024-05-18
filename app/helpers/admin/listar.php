@@ -1,12 +1,20 @@
 <?php
-try {
+$nome = filter_input(INPUT_GET, 'nome', FILTER_SANITIZE_URL);
+if (!empty($nome)) {
     require("../../database/database_config.php");
-    $sql = "SELECT * FROM ADMINISTRADOR ";
-    $stament = $pdo->prepare($sql); // Prepara a query
-    $stament->execute(); // Executa a query
-    $admins = $stament->fetchAll();
-    $retorna = ["erro" => false, "dados" => $admins];
-} catch (PDOException $e) {
-    $retorna = ["erro" => true, "mensagem" => "Erro: " . $e->getMessage()];
+    $query = "SELECT * FROM ADMINISTRADOR WHERE ADM_NOME LIKE ? ";
+    $params = array("%$nome%");
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    $admin = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $retorna = ["erro" => false, "dados" => $admin];
+} else {
+    require("../../database/database_config.php");
+    $query = "SELECT * FROM ADMINISTRADOR";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $admin = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $retorna = ["erro" => false, "dados" => $admin];
 }
 echo json_encode($retorna);
+
