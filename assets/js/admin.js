@@ -24,7 +24,8 @@ async function listAllAdmins() {
 	});
 }
 async function listAdminsAtivos(nome) {
-	const data = await fetch(`../../app/helpers/admin/listar_admin_ativos.php?nome=${nome}`);
+	let url_vazia = nome === "" ? "../../app/helpers/admin/listar_admin_ativos.php" : `../../app/helpers/admin/listar_admin_ativos.php?nome=${nome}`;
+	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -89,7 +90,6 @@ function deletarAdministrador(id) {
 	const deleteIdInput = document.querySelector("#deleteIdInput");
 	deleteIdInput.value = id;
 }
-
 function verifySearchRadioAdmin() {
 	let btn_search_admin = document.querySelector(".btn-search-admin");
 
@@ -106,7 +106,7 @@ function verifySearchRadioAdmin() {
 			}
 			if (searchRadio === "Ativos") {
 				table_admins.innerHTML = "";
-				listAdminsAtivos();
+				listAdminsAtivos("");
 				return;
 			}
 			if (searchRadio === "Inativos") {
@@ -119,7 +119,7 @@ function verifySearchRadioAdmin() {
 				table_admins.innerHTML = "";
 				listAdminsAtivos(searchValue);
 				return;
-				
+
 			}
 		}
 	});
