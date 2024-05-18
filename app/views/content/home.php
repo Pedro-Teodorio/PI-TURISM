@@ -110,11 +110,11 @@ require_once("../helpers/home/contador_administradores_ativos.php");
                     <?php foreach (listarProdutosAltoEstoque() as $produto) { ?>
                         <tr class="vertical-align">
                             <td><?= $produto['ranking']; ?></td>
-                            <td><?= $produto['produto_id']; ?></td>
-                            <td><?= $produto['produto_nome']; ?></td>
-                            <td><?= $produto['categoria_nome']; ?></td>
-                            <td><?= $produto['produto_desc']; ?></td>
-                            <td><?= $produto['produto_preco']; ?></td>
+                            <td><?= $produto['PRODUTO_ID']; ?></td>
+                            <td><?= $produto['PRODUTO_NOME']; ?></td>
+                            <td><?= $produto['CATEGORIA_NOME']; ?></td>
+                            <td><?= $produto['PRODUTO_DESC']; ?></td>
+                            <td><?= $produto['PRODUTO_PRECO']; ?></td>
                             <td><?= $produto['produto_qtd']; ?></td>
                         </tr>
                     <?php } ?>
