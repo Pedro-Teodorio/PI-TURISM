@@ -119,6 +119,7 @@ function verifySearchRadioAdmin() {
 				table_admins.innerHTML = "";
 				listAdminsAtivos(searchValue);
 				return;
+				
 			}
 		}
 	});
