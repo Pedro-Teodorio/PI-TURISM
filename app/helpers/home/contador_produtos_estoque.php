@@ -6,14 +6,14 @@ function contadorDeProdutosEmEstoque()
     try {
         $stmt = $pdo->prepare(
             "SELECT
-                SUM( COALESCE(produto_estoque.produto_qtd,0) ) AS produtos_em_estoque
+                SUM( COALESCE(PRODUTO_ESTOQUE.PRODUTO_QTD,0) ) AS produtos_em_estoque
 
-            FROM produto
+            FROM PRODUTO
                 
-                LEFT JOIN produto_estoque
-                    USING(produto_id)
+                LEFT JOIN PRODUTO_ESTOQUE
+                    USING(PRODUTO_ID)
                 
-            WHERE produto.produto_ativo = 1"
+            WHERE PRODUTO.PRODUTO_ATIVO = 1"
         );
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

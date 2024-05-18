@@ -14,7 +14,7 @@ try {
               , GROUP_CONCAT( PRODUTO_IMAGEM.IMAGEM_ORDEM ) AS IMAGEM_ORDEM
               , COALESCE(PRODUTO_ESTOQUE.PRODUTO_QTD,0) AS PRODUTO_QTD
     
-            FROM produto
+            FROM PRODUTO
     
                 INNER JOIN CATEGORIA
                     USING(CATEGORIA_ID)

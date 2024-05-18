@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ativo = isset($_POST['ativo']) ? 1 : 0;
 
     try {
-        $sql = "INSERT INTO administrador (ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO ) VALUES (:nome, :senha, :email ,:ativo)";
+        $sql = "INSERT INTO ADMINISTRADOR (ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO ) VALUES (:nome, :senha, :email ,:ativo)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);

@@ -5,9 +5,9 @@ function contadorDeProdutosAtivos()
     try {
         $stmt = $pdo->prepare(
             "SELECT
-                COUNT( DISTINCT( produto.produto_id ) ) AS produtos_ativos
-            FROM produto
-            WHERE produto.produto_ativo = 1"
+                COUNT( DISTINCT( PRODUTO.PRODUTO_ID ) ) AS produtos_ativos
+            FROM PRODUTO
+            WHERE PRODUTO.PRODUTO_ATIVO = 1"
         );
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
