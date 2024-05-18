@@ -36,12 +36,12 @@
             <table class="table table-hover text-center border">
 
                 <thead class="table-head-color">
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Senha</th>
-                    <th scope="col">Ativo</th>
-                    <th scope="col">Ações</th>
+                    <th class="bg-first text-light" scope="col">#</th>
+                    <th class="bg-first text-light" scope="col">Nome</th>
+                    <th class="bg-first text-light" scope="col">Email</th>
+                    <th class="bg-first text-light" scope="col">Senha</th>
+                    <th class="bg-first text-light" scope="col">Ativo</th>
+                    <th class="bg-first text-light" scope="col">Ações</th>
                 </thead>
                 <tbody id="table-admins">
                 </tbody>
@@ -82,8 +82,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                 </form>
             </div>
@@ -127,8 +127,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-success">Editar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Editar</button>
                     </div>
                 </form>
             </div>
@@ -151,8 +151,8 @@
                     <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Excluir</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Excluir</button>
                 </div>
             </form>
 

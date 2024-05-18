@@ -93,7 +93,7 @@ require_once("../helpers/home/contador_administradores_ativos.php");
 
     <div class="card mt-4 rounded-3">
         <div class="card-body">
-            <table class="table table-hover text-center border table-sm ">
+            <table class="table table-hover text-center border">
                 <caption class="caption-top fs-5 text-black-50">
                     10 produtos ativos com maior quantidade em estoque
                 </caption>

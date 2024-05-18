@@ -12,7 +12,7 @@ async function listAllProdutos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto encontrado com esse nome</td>
+			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado com esse nome</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -20,7 +20,6 @@ async function listAllProdutos(nome) {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
 		let status = PRODUTO_ATIVO === 1 ? "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>" : "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
-		console.log(IMAGEM_URL);
 		tr.innerHTML = `
 			<td>${PRODUTO_ID}</td>
 			<td>${PRODUTO_NOME}</td>
@@ -42,6 +41,9 @@ async function listAllProdutos(nome) {
 				</button>
 				<button data-bs-toggle="modal" data-bs-target="#produtoModalDelete" onclick="deletarProduto(${PRODUTO_ID})"  class="btn btn-first-color">
 					<i class="bi bi-trash"></i>
+				</button>
+				<button data-bs-toggle="modal" data-bs-target="#produtoModalDetalhes" onclick="detalhesProduto(${PRODUTO_ID})"  class="btn btn-first-color">
+					<i class="bi bi-eye"></i>
 				</button>
 			</td>
 		`;
@@ -57,7 +59,7 @@ async function listProdutosAtivos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto ativo encontrado com esse nome</td>
+			<td colspan="11" class="text-center text-danger fw-bold">Nenhum produto ativo encontrado com esse nome</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -87,6 +89,9 @@ async function listProdutosAtivos(nome) {
 				</button>
 				<button data-bs-toggle="modal" data-bs-target="#produtoModalDelete" onclick="deletarProduto(${PRODUTO_ID})"  class="btn btn-first-color">
 					<i class="bi bi-trash"></i>
+				</button>
+				<button data-bs-toggle="modal" data-bs-target="#produtoModalDetalhes" onclick="detalhesProduto(${PRODUTO_ID})"  class="btn btn-first-color">
+					<i class="bi bi-eye"></i>
 				</button>
 			</td>
 		`;
@@ -102,7 +107,7 @@ async function listProdutosInativos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="6" class="text-center text-danger fw-bold">Nenhum produto inativo encontrado com esse nome</td>
+			<td colspan="11" class="text-center text-danger fw-bold">Nenhum produto inativo encontrado com esse nome</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -132,6 +137,9 @@ async function listProdutosInativos(nome) {
 				</button>
 				<button data-bs-toggle="modal" data-bs-target="#produtoModalDelete" onclick="deletarProduto(${PRODUTO_ID})"  class="btn btn-first-color">
 					<i class="bi bi-trash"></i>
+				</button>
+				<button data-bs-toggle="modal" data-bs-target="#produtoModalDetalhes" onclick="detalhesProduto(${PRODUTO_ID})"  class="btn btn-first-color">
+					<i class="bi bi-eye"></i>
 				</button>
 			</td>
 		`;
@@ -197,6 +205,65 @@ async function editarProduto(id) {
 	});
 }
 
+async function detalhesProduto(id) {
+	const data = await fetch(`../../app/helpers/produtos/pegar_por_id.php?id=${id}`);
+	const { erro, dados } = await data.json();
+	const { PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD } = dados[0];
+	const detalhesNameInput = document.querySelector("#detalhesNameInput");
+	const detalhesDescInput = document.querySelector("#detalhesDescInput");
+	const detalhesPrecoInput = document.querySelector("#detalhesPrecoInput");
+	const detalhesDescontoInput = document.querySelector("#detalhesDescontoInput");
+	const detalhesQuantidadeInput = document.querySelector("#detalhesQuantidadeInput");
+	const select_categoria_detalhes = document.querySelectorAll("#select_categoria_detalhes option");
+	const carrousel_content = document.getElementById("carrousel-content")
+
+	detalhesNameInput.value = PRODUTO_NOME;
+	detalhesDescInput.value = PRODUTO_DESC;
+	detalhesPrecoInput.value = PRODUTO_PRECO;
+	detalhesDescontoInput.value = PRODUTO_DESCONTO;
+	detalhesQuantidadeInput.value = PRODUTO_QTD;
+
+
+
+	select_categoria_detalhes.forEach((option) => {
+		if (option.innerText == CATEGORIA_NOME) {
+			option.selected = true;
+		}
+	});
+	const detalhesCheck = document.querySelector("#detalhesCheck");
+	detalhesCheck.checked = PRODUTO_ATIVO === 1 ? true : false;
+
+	let images = [];
+
+	dados.forEach((dado) => {
+		images.push({ url: dado.IMAGEM_URL, ordem: dado.IMAGEM_ORDEM });
+	});
+
+	let ordem_imagens = images.map((image) => image.ordem);
+	ordem_imagens.sort((a, b) => a - b);
+	let menor_ordem = ordem_imagens[0];
+
+	carrousel_content.innerHTML = "";
+
+	images.forEach((image) => {
+		if (image.ordem == menor_ordem) {
+			carrousel_content.innerHTML += `
+			<div class="carousel-item active">
+				<img src="${image.url}" class="d-block w-100 object-fit-cover image-carrousel" alt="..." style="height: 350px;">
+			</div>
+			`;
+			return;
+		}
+		carrousel_content.innerHTML += `
+		<div class="carousel-item h-100">
+			<img src="${image.url}" class="d-block w-100 image-carrousel object-fit-cover" alt="..." style="height: 350px;">
+		</div>
+		`;
+	});
+
+
+}
+
 function deletarProduto(id) {
 	const deleteIdInput = document.querySelector("#deleteIdInput");
 	deleteIdInput.value = id;
@@ -218,6 +285,20 @@ async function loadSelectCategorias() {
 }
 async function loadSelectCategoriasEdit() {
 	const selectCategoria = document.querySelector("#select_categoria_edit");
+	await fetch("../../app/helpers/categorias/listar_categorias_ativas.php")
+		.then((response) => response.json())
+		.then((data) => {
+			data.dados.forEach((categoria) => {
+				const { CATEGORIA_ID, CATEGORIA_NOME } = categoria;
+				const option = document.createElement("option");
+				option.value = CATEGORIA_ID;
+				option.innerText = CATEGORIA_NOME;
+				selectCategoria.appendChild(option);
+			});
+		});
+}
+async function loadSelectCategoriasDetalhes() {
+	const selectCategoria = document.querySelector("#select_categoria_detalhes");
 	await fetch("../../app/helpers/categorias/listar_categorias_ativas.php")
 		.then((response) => response.json())
 		.then((data) => {
@@ -296,8 +377,10 @@ function verifySearchRadioProdutos() {
 	});
 }
 
+
 listAllProdutos("");
 loadSelectCategorias();
 loadSelectCategoriasEdit();
+loadSelectCategoriasDetalhes();
 verifySearchRadioProdutos();
 //#endregion

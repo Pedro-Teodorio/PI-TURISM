@@ -34,11 +34,11 @@
             <table class="table table-hover text-center border">
 
                 <thead class="table-head-color">
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Ativo</th>
-                    <th scope="col">Ações</th>
+                    <th class="bg-first text-light" scope="col">#</th>
+                    <th class="bg-first text-light" scope="col">Nome</th>
+                    <th class="bg-first text-light" scope="col">Descrição</th>
+                    <th class="bg-first text-light" scope="col">Ativo</th>
+                    <th class="bg-first text-light" scope="col">Ações</th>
                 </thead>
                 <tbody id="table-categoria">
                 </tbody>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Descrição</label>
-                            <input type="descricao" class="form-control" id="descricaoInput" placeholder="Digite a descrição da categoria" name="descricao" required>
+                            <textarea  class="form-control" id="descricaoInput" placeholder="Digite a descrição da categoria" name="descricao" required></textarea>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="ativo" id="flexCheckDefault">
@@ -75,8 +75,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                 </form>
             </div>
@@ -116,8 +116,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-success">Editar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Editar</button>
                     </div>
                 </form>
             </div>
@@ -140,8 +140,8 @@
                     <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Excluir</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Excluir</button>
                 </div>
             </form>
 
