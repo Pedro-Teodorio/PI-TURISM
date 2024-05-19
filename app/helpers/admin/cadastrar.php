@@ -1,4 +1,6 @@
 <?php 
+require("../../database/database_config.php");
+
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 $sql = "INSERT INTO ADMINISTRADOR (ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO ) VALUES (:nome, :senha, :email ,:ativo)";

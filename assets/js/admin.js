@@ -178,6 +178,7 @@ formAddAdmin.addEventListener("submit", async (e) => {
 	});
 	const { erro, mensagem } = await data.json();
 	if (!erro) {
+		formAddAdmin.reset();
 		adminModal.hide();
 		table_admins.innerHTML = "";
 		listAllAdmins("");
@@ -203,6 +204,7 @@ function updateAdmin() {
 		});
 		const { erro, mensagem } = await data.json();
 		if (!erro) {
+			editForm.reset();
 			adminModalEdit.hide();
 			table_admins.innerHTML = "";
 			listAllAdmins("");
