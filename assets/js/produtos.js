@@ -377,6 +377,91 @@ function verifySearchRadioProdutos() {
 	});
 }
 
+function addProdutos(){
+	const formProdutosAdd = document.querySelector("#formProdutosAdd");
+	const produtoModal = new bootstrap.Modal("#produtoModal");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error");
+	formProdutosAdd.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosAdd);
+		formData.append("addProdutos",1)
+		const url = "../../app/helpers/produtos/cadastrar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosAdd.reset();
+			produtoModal.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+
+function updateProdutos(){
+	const formProdutosEdit = document.querySelector("#formProdutosEdit");
+	const produtoModalEdit = new bootstrap.Modal("#produtoModalEdit");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-edit");
+	formProdutosEdit.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosEdit);
+		formData.append("editProdutos",1)
+		const url = "../../app/helpers/produtos/editar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosEdit.reset();
+			produtoModalEdit.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+
+}
+
+function deleteProduto(){
+	const formProdutosDelete = document.querySelector("#formProdutosDelete");
+	const produtoModalDelete = new bootstrap.Modal("#produtoModalDelete");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-delete");
+	formProdutosDelete.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosDelete);
+		formData.append("deleteProdutos",1)
+		const url = "../../app/helpers/produtos/excluir.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosDelete.reset();
+			produtoModalDelete.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+
+}
 
 listAllProdutos("");
 loadSelectCategorias();
@@ -384,3 +469,7 @@ loadSelectCategoriasEdit();
 loadSelectCategoriasDetalhes();
 verifySearchRadioProdutos();
 //#endregion
+
+addProdutos();
+updateProdutos();
+deleteProduto();
