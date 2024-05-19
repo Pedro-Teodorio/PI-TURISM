@@ -1,32 +1,31 @@
 <?php 
-
-if(!empty($id)){
-    $id = $_GET['id'];
-    require("../../database/database_config.php");
-    $sql = "DELETE FROM ADMINISTRADOR WHERE ADM_ID = :id"; // Query para deletar um produto
-    $stament = $pdo->prepare($sql); // Prepara a query
-    $stament->bindParam(':id', $id, PDO::PARAM_INT); // Adiciona o parâmetro id
-    $stament->execute(); // Executa a query
-    header('Location: ../../views/index.php?page=admins');
-}
-else{
-    echo "Erro ao excluir o administrador";
-}
-
 require("../../database/database_config.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
-    
-    try {
-        $sql = "DELETE FROM ADMINISTRADOR WHERE ADM_ID = :id"; // Query para deletar um produto
-        $stament = $pdo->prepare($sql); // Prepara a query
-        $stament->bindParam(':id', $id, PDO::PARAM_INT); // Adiciona o parâmetro id
-        $stament->execute(); // Executa a query
-        header('Location: ../../views/index.php?page=admins');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
+$dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+$sql = "DELETE FROM ADMINISTRADOR WHERE ADM_ID = :id"; 
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':id', $dados["id"], PDO::PARAM_INT);
+$stmt->execute();
+
+if ($stmt->rowCount()) {
+    $retorna = ['erro' => false, 'mensagem' => ' 
+    <div class="alert alert-success alert-dismissible position-fixed bottom-0 end-0 m-4" role="alert">
+        <div>
+           Administrador deletado com sucesso!
+        </div> 
+        <button type="button" class="btn-close border-0 shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>'
+];
+} else {
+    $retorna = ['erro' => true, 'mensagem' => ' 
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <div>
+              Erro ao deletar administrador!
+        </div> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>'
+];
 }
+echo json_encode($retorna);
 
 ?>

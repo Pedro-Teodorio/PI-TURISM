@@ -1,5 +1,4 @@
 //#region Scripts for Admin Dashboard
-const link_admin = document.querySelector("#link_admin");
 const table_admins = document.querySelector("#table-admins");
 
 async function listAllAdmins(nome) {
@@ -13,7 +12,6 @@ async function listAllAdmins(nome) {
 			<td colspan="6" class="text-center text-danger fw-bold">Nenhum administrador encontrado com esse nome</td>
 		`;
 		table_admins.appendChild(tr);
-		
 	}
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -45,7 +43,6 @@ async function listAdminsAtivos(nome) {
 			<td colspan="6" class="text-center text-danger fw-bold">Nenhum administrador ativo encontrado com esse nome</td>
 		`;
 		table_admins.appendChild(tr);
-		
 	}
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -76,7 +73,6 @@ async function listAdminsInativos(nome) {
 			<td colspan="6" class="text-center text-danger fw-bold">Nenhum administrador inativo encontrado com esse nome</td>
 		`;
 		table_admins.appendChild(tr);
-		
 	}
 	dados.forEach((admin) => {
 		const { ADM_ID, ADM_NOME, ADM_SENHA, ADM_EMAIL, ADM_ATIVO } = admin;
@@ -164,5 +160,87 @@ function verifySearchRadioAdmin() {
 }
 //#endregion
 
+
+
+function addAdmin() {
+const formAddAdmin = document.querySelector("#formAddAdmin");
+const adminModal = new bootstrap.Modal("#adminModal");
+const msg_success = document.querySelector("#msg-success");
+const msg_error = document.querySelector("#msg-error");
+formAddAdmin.addEventListener("submit", async (e) => {
+	e.preventDefault();
+	let cadForm = new FormData(formAddAdmin);
+	cadForm.append("add", 1);
+
+	const data = await fetch("../../app/helpers/admin/cadastrar.php", {
+		method: "POST",
+		body: cadForm,
+	});
+	const { erro, mensagem } = await data.json();
+	if (!erro) {
+		adminModal.hide();
+		table_admins.innerHTML = "";
+		listAllAdmins("");
+		msg_success.innerHTML = mensagem;
+	} else {
+		msg_error.innerHTML = mensagem;
+	}
+});
+}
+
+function updateAdmin() {
+	const editForm = document.querySelector("#editForm");
+	const adminModalEdit = new bootstrap.Modal("#adminModalEdit");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-edit");
+	editForm.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		let editFormData = new FormData(editForm);
+		editFormData.append("edit", 1);
+		const data = await fetch("../../app/helpers/admin/editar.php", {
+			method: "POST",
+			body: editFormData,
+		});
+		const { erro, mensagem } = await data.json();
+		if (!erro) {
+			adminModalEdit.hide();
+			table_admins.innerHTML = "";
+			listAllAdmins("");
+			msg_success.innerHTML = mensagem;
+		} else {
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+function deleteAdmin(){
+	const deleteForm = document.querySelector("#deleteForm");
+	const adminModalDelete = new bootstrap.Modal("#adminModalDelete");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-delete");
+	deleteForm.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		let deleteFormData = new FormData(deleteForm);
+		deleteFormData.append("delete", 1);
+		const data = await fetch("../../app/helpers/admin/excluir.php", {
+			method: "POST",
+			body: deleteFormData,
+		});
+		const { erro, mensagem } = await data.json();
+		if (!erro) {
+			adminModalDelete.hide();
+			table_admins.innerHTML = "";
+			listAllAdmins("");
+			msg_success.innerHTML = mensagem;
+		} else {
+			msg_error.innerHTML = mensagem;
+		}
+	});
+
+}
 listAllAdmins("");
 verifySearchRadioAdmin();
+
+addAdmin();
+updateAdmin();
+deleteAdmin();
+
