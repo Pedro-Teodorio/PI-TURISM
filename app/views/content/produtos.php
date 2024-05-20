@@ -132,11 +132,11 @@
                         <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                             <div class="mb-3 mt-3">
                                 <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" />
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" required />
                             </div>
                             <div class="mb-3 mt-3">
                                 <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-                                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
+                                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" required />
                                 <div class="container_images">
 
                                 </div>

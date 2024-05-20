@@ -12,7 +12,7 @@ async function listAllProdutos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado com esse nome</td>
+			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -192,11 +192,11 @@ async function editarProduto(id) {
 			<div class="row mb-3 mt-3">
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}"/>
+					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}" required/>
 				</div>
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}" />
+					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}" required />
 			  	</div>
 			</div>
 
@@ -316,11 +316,11 @@ function adicionarImages() {
 	container_images.innerHTML += `
       <div class="mb-3 mt-3">
           <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]"/>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" required/>
       </div>
       <div class="mb-3 mt-3">
           <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" name="imagem_ordem[]"/>
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" name="imagem_ordem[]" required/>
       </div>
       `;
 }
