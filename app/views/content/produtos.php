@@ -81,9 +81,10 @@
                 </ul>
 
                 <!-- Tab content -->
-                <form action="../../app/helpers/produtos/cadastrar.php" method="post">
+                <form id="formProdutosAdd" method="post">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                            <div id="msg-error"></div>
                             <div class="mb-3 mt-3">
                                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
                                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome do produto" name="nome" />
@@ -131,11 +132,11 @@
                         <div class="tab-pane fade " id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                             <div class="mb-3 mt-3">
                                 <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" />
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" required />
                             </div>
                             <div class="mb-3 mt-3">
                                 <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-                                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" />
+                                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" required />
                                 <div class="container_images">
 
                                 </div>
@@ -184,11 +185,13 @@
                 </ul>
 
                 <!-- Tab content -->
-                <form action="../../app/helpers/produtos/editar.php" method="post">
+                <form id="formProdutosEdit" method="post">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tabEdit1" role="tabpanel" aria-labelledby="tab1-tab">
                             <div class="mb-3 mt-3">
+                                <div id="msg-error-edit"></div>
                                 <input type="text" class="form-control" id="editIdInput" placeholder="Digite o nome do produto" name="id" hidden />
+
                                 <label for="exampleFormControlInput1" class="form-label">Nome</label>
                                 <input type="text" class="form-control" id="editNameInput" placeholder="Digite o nome do produto" name="nome" />
                             </div>
@@ -253,16 +256,17 @@
 </div>
 <!-- Fim do Modal editar Produtos -->
 
-<!-- Modal excluir Categoria -->
-<div class="modal fade" id="produtoModalDelete" tabindex="-1" aria-labelledby="categoriaModalDeleteLabel" aria-hidden="true">
+<!-- Modal excluir Produtos -->
+<div class="modal fade" id="produtoModalDelete" tabindex="-1" aria-labelledby="produtoModalDeleteLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-first">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Produto</h1>
             </div>
 
-            <form action="../../app/helpers/produtos/excluir.php" method="post">
+            <form id="formProdutosDelete" method="post">
                 <div class="modal-body text-center pb-0">
+                    <div id="msg-error-delete"></div>
                     <p class="fs-5 fw-bold">Deseja realmente excluir o produto?</p>
                     <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                 </div>
@@ -275,7 +279,7 @@
         </div>
     </div>
 </div>
-<!-- Fim do Modal excluir  -->
+<!-- Fim do modal  excluir Produtos  -->
 
 <!-- Modal de Detalhes -->
 <div class="modal fade " id="produtoModalDetalhes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -374,5 +378,5 @@
     </div>
 </div>
 <!-- Fim do Modal de Detalhes -->
-
+<div id="msg-success"></div>
 <script src="../../assets/js/produtos.js"></script>

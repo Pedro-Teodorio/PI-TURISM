@@ -14,7 +14,7 @@
                 <label class="form-check-label" for="radioTodos">Todos</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input input-check-admin"  type="radio" name="inlineRadioOptions" id="radioAtivo" value="Ativos">
+                <input class="form-check-input input-check-admin" type="radio" name="inlineRadioOptions" id="radioAtivo" value="Ativos">
                 <label class="form-check-label" for="radioAtivo">Ativos</label>
             </div>
             <div class="form-check form-check-inline">
@@ -60,7 +60,8 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Administrador</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/admin/cadastrar.php" method="post">
+                <div id="msg-error"> </div>
+                <form id="formAddAdmin">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -101,10 +102,10 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Administrador</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/admin/editar.php" method="post">
+                <form id="editForm" method="post">
                     <div class="modal-body">
+                        <div id="msg-error-edit"> </div>
                         <div class="mb-3">
-
                             <input type="text" class="form-control" id="editIdInput" placeholder="Digite o nome do produto" name="id" hidden>
                         </div>
                         <div class="mb-3">
@@ -145,8 +146,9 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Administrador</h1>
             </div>
 
-            <form action="../../app/helpers/admin/excluir.php" method="post">
+            <form id="deleteForm" method="post">
                 <div class="modal-body text-center pb-0">
+                    <div id="msg-error-delete"> </div>
                     <p class="fs-5 fw-bold">Deseja realmente excluir o administrador?</p>
                     <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                 </div>
@@ -159,5 +161,10 @@
         </div>
     </div>
 </div>
+
+<div id="msg-success">
+   
+</div>
 <!-- Fim do Modal excluir Administrador -->
+
 <script src="../../assets/js/admin.js"></script>

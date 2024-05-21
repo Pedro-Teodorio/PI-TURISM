@@ -12,7 +12,7 @@ async function listAllProdutos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado com esse nome</td>
+			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -192,11 +192,11 @@ async function editarProduto(id) {
 			<div class="row mb-3 mt-3">
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}"/>
+					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}" required/>
 				</div>
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}" />
+					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}" required />
 			  	</div>
 			</div>
 
@@ -316,11 +316,11 @@ function adicionarImages() {
 	container_images.innerHTML += `
       <div class="mb-3 mt-3">
           <label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]"/>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" required/>
       </div>
       <div class="mb-3 mt-3">
           <label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" name="imagem_ordem[]"/>
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" name="imagem_ordem[]" required/>
       </div>
       `;
 }
@@ -377,6 +377,91 @@ function verifySearchRadioProdutos() {
 	});
 }
 
+function addProdutos(){
+	const formProdutosAdd = document.querySelector("#formProdutosAdd");
+	const produtoModal = new bootstrap.Modal("#produtoModal");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error");
+	formProdutosAdd.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosAdd);
+		formData.append("addProdutos",1)
+		const url = "../../app/helpers/produtos/cadastrar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosAdd.reset();
+			produtoModal.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+
+function updateProdutos(){
+	const formProdutosEdit = document.querySelector("#formProdutosEdit");
+	const produtoModalEdit = new bootstrap.Modal("#produtoModalEdit");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-edit");
+	formProdutosEdit.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosEdit);
+		formData.append("editProdutos",1)
+		const url = "../../app/helpers/produtos/editar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosEdit.reset();
+			produtoModalEdit.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+
+}
+
+function deleteProduto(){
+	const formProdutosDelete = document.querySelector("#formProdutosDelete");
+	const produtoModalDelete = new bootstrap.Modal("#produtoModalDelete");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-delete");
+	formProdutosDelete.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formProdutosDelete);
+		formData.append("deleteProdutos",1)
+		const url = "../../app/helpers/produtos/excluir.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const {erro,mensagem} = await data.json();
+		if(!erro){
+			formProdutosDelete.reset();
+			produtoModalDelete.hide();
+			table_produto.innerHTML = "";
+			listAllProdutos("");
+			msg_success.innerHTML = mensagem;
+		}
+		else{
+			msg_error.innerHTML = mensagem;
+		}
+	});
+
+}
 
 listAllProdutos("");
 loadSelectCategorias();
@@ -384,3 +469,7 @@ loadSelectCategoriasEdit();
 loadSelectCategoriasDetalhes();
 verifySearchRadioProdutos();
 //#endregion
+
+addProdutos();
+updateProdutos();
+deleteProduto();

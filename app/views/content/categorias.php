@@ -57,8 +57,11 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Categoria</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/categorias/cadastrar.php" method="post">
+                <form id="formAddCategoria" method="post">
                     <div class="modal-body">
+                        <div id="msg-error">
+
+                        </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o nome da categoria" name="nome" required>
@@ -86,7 +89,6 @@
 <!-- Fim do Modal adicionar Categoria -->
 
 <!-- Modal editar Categoria -->
-
 <div class="modal fade" id="categoriaModalEdit" tabindex="-1" aria-labelledby="categoriaModalEditLabel" aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -94,10 +96,10 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Categoria</h1>
             </div>
             <div class="modal-body">
-                <form action="../../app/helpers/categorias/editar.php" method="post">
+                <form id="formEditCategoria" method="post">
                     <div class="modal-body">
                         <div class="mb-3">
-
+                            <div id="msg-error-edit"></div>
                             <input type="text" class="form-control" id="editIdInput" placeholder="Digite o nome da categoria" name="id" hidden>
                         </div>
                         <div class="mb-3">
@@ -134,8 +136,9 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Categoria</h1>
             </div>
 
-            <form action="../../app/helpers/categorias/excluir.php" method="post">
+            <form id="formDeleteCategoria" method="post">
                 <div class="modal-body text-center pb-0">
+                    <div id="msg-error-delete"></div>
                     <p class="fs-5 fw-bold">Deseja realmente excluir a categoria?</p>
                     <input type="number" class="form-control" id="deleteIdInput" name="id" hidden>
                 </div>
@@ -149,4 +152,7 @@
     </div>
 </div>
 <!-- Fim do Modal excluir Administrador -->
+<div id="msg-success">
+
+</div>
 <script src="../../assets/js/categoria.js"></script>

@@ -1,4 +1,3 @@
-const link_categoria = document.querySelector("#link_categoria");
 const table_categoria = document.querySelector("#table-categoria");
 
 async function listAllCategorias(nome) {
@@ -88,28 +87,7 @@ async function listCategoriasInativas(nome) {
 		table_categoria.appendChild(tr);
 	});
 }
-async function editarCategoria(id) {
-	const editIdInput = document.querySelector("#editIdInput");
-	const editNameInput = document.querySelector("#editNameInput");
-	const editDescricaoInput = document.querySelector("#editDescricaoInput");
-	const editCheck = document.querySelector("#editCheck");
-	const data = await fetch(`../../app/helpers/categorias/pegar_por_id.php?id=${id}`);
-	const { erro, dados } = await data.json();
 
-	editIdInput.value = dados.CATEGORIA_ID;
-	editNameInput.value = dados.CATEGORIA_NOME;
-	editDescricaoInput.value = dados.CATEGORIA_DESC;
-	if (dados.CATEGORIA_ATIVO == 1) {
-		editCheck.checked = true;
-	} else {
-		editCheck.checked = false;
-	}
-}
-
-function deletarCategoria(id) {
-	const deleteIdInput = document.querySelector("#deleteIdInput");
-	deleteIdInput.value = id;
-}
 
 function verifySearchRadioCategorias() {
 	let btn_search_admin = document.querySelector(".btn-search-admin");
@@ -155,5 +133,111 @@ function verifySearchRadioCategorias() {
 	});
 }
 
+
+function addCategoria() {
+	const formAddCategoria = document.querySelector("#formAddCategoria");
+	const categoriaModal = new bootstrap.Modal("#categoriaModal");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error");
+	formAddCategoria.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formAddCategoria);
+		formData.append("edit",1)
+		const url = "../../app/helpers/categorias/cadastrar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const { erro, mensagem } = await data.json();
+		if (!erro) {
+			formAddCategoria.reset();
+			categoriaModal.hide();
+			table_categoria.innerHTML = "";
+			listAllCategorias("");
+			msg_success.innerHTML = mensagem;
+		} else {
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+
+function updateCategoria() {
+	const formEditCategoria = document.querySelector("#formEditCategoria");
+	const categoriaModalEdit = new bootstrap.Modal("#categoriaModalEdit");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-edit");
+	formEditCategoria.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formEditCategoria);
+		formData.append("edit",1)
+		const url = "../../app/helpers/categorias/editar.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const { erro, mensagem } = await data.json();
+		if (!erro) {
+			formEditCategoria.reset();
+			categoriaModalEdit.hide();
+			table_categoria.innerHTML = "";
+			listAllCategorias("");
+			msg_success.innerHTML = mensagem;
+		} else {
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+async function editarCategoria(id) {
+	const editIdInput = document.querySelector("#editIdInput");
+	const editNameInput = document.querySelector("#editNameInput");
+	const editDescricaoInput = document.querySelector("#editDescricaoInput");
+	const editCheck = document.querySelector("#editCheck");
+	const data = await fetch(`../../app/helpers/categorias/pegar_por_id.php?id=${id}`);
+	const { erro, dados } = await data.json();
+
+	editIdInput.value = dados.CATEGORIA_ID;
+	editNameInput.value = dados.CATEGORIA_NOME;
+	editDescricaoInput.value = dados.CATEGORIA_DESC;
+	if (dados.CATEGORIA_ATIVO == 1) {
+		editCheck.checked = true;
+	} else {
+		editCheck.checked = false;
+	}
+}
+
+function deleteCategoria() {
+	const formDeleteCategoria = document.querySelector("#formDeleteCategoria");
+	const categoriaModalDelete = new bootstrap.Modal("#categoriaModalDelete");
+	const msg_success = document.querySelector("#msg-success");
+	const msg_error = document.querySelector("#msg-error-delete");
+	formDeleteCategoria.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const formData = new FormData(formDeleteCategoria);
+		formData.append("delete",1)
+		const url = "../../app/helpers/categorias/excluir.php";
+		const data = await fetch(url, {
+			method: "POST",
+			body: formData,
+		});
+		const { erro, mensagem } = await data.json();
+		if (!erro) {
+			categoriaModalDelete.hide();
+			table_categoria.innerHTML = "";
+			listAllCategorias("");
+			msg_success.innerHTML = mensagem;
+		} else {
+			msg_error.innerHTML = mensagem;
+		}
+	});
+}
+function deletarCategoria(id) {
+	const deleteIdInput = document.querySelector("#deleteIdInput");
+	deleteIdInput.value = id;
+}
+
 listAllCategorias("");
-verifySearchRadioCategorias()
+verifySearchRadioCategorias();
+
+addCategoria();
+updateCategoria();
+deleteCategoria();
