@@ -438,24 +438,25 @@ function deleteProduto(){
 	const msg_error = document.querySelector("#msg-error-delete");
 	formProdutosDelete.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		const formData = new FormData(formProdutosDelete);
-		formData.append("deleteProdutos",1)
-		const url = "../../app/helpers/produtos/excluir.php";
-		const data = await fetch(url, {
-			method: "POST",
-			body: formData,
-		});
-		const {erro,mensagem} = await data.json();
-		if(!erro){
-			formProdutosDelete.reset();
-			produtoModalDelete.hide();
-			table_produto.innerHTML = "";
-			listAllProdutos("");
-			msg_success.innerHTML = mensagem;
-		}
-		else{
-			msg_error.innerHTML = mensagem;
-		}
+		alert("Não é possível excluir um produto, pois ele pode estar associado a um pedido.");
+		// const formData = new FormData(formProdutosDelete);
+		// formData.append("deleteProdutos",1)
+		// const url = "../../app/helpers/produtos/excluir.php";
+		// const data = await fetch(url, {
+		// 	method: "POST",
+		// 	body: formData,
+		// });
+		// const {erro,mensagem} = await data.json();
+		// if(!erro){
+		// 	formProdutosDelete.reset();
+		// 	produtoModalDelete.hide();
+		// 	table_produto.innerHTML = "";
+		// 	listAllProdutos("");
+		// 	msg_success.innerHTML = mensagem;
+		// }
+		// else{
+		// 	msg_error.innerHTML = mensagem;
+		// }
 	});
 
 }

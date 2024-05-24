@@ -212,22 +212,23 @@ function deleteCategoria() {
 	const msg_error = document.querySelector("#msg-error-delete");
 	formDeleteCategoria.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		const formData = new FormData(formDeleteCategoria);
-		formData.append("delete",1)
-		const url = "../../app/helpers/categorias/excluir.php";
-		const data = await fetch(url, {
-			method: "POST",
-			body: formData,
-		});
-		const { erro, mensagem } = await data.json();
-		if (!erro) {
-			categoriaModalDelete.hide();
-			table_categoria.innerHTML = "";
-			listAllCategorias("");
-			msg_success.innerHTML = mensagem;
-		} else {
-			msg_error.innerHTML = mensagem;
-		}
+		alert("Não é possível excluir categorias")
+		// const formData = new FormData(formDeleteCategoria);
+		// formData.append("delete",1)
+		// const url = "../../app/helpers/categorias/excluir.php";
+		// const data = await fetch(url, {
+		// 	method: "POST",
+		// 	body: formData,
+		// });
+		// const { erro, mensagem } = await data.json();
+		// if (!erro) {
+		// 	categoriaModalDelete.hide();
+		// 	table_categoria.innerHTML = "";
+		// 	listAllCategorias("");
+		// 	msg_success.innerHTML = mensagem;
+		// } else {
+		// 	msg_error.innerHTML = mensagem;
+		// }
 	});
 }
 function deletarCategoria(id) {

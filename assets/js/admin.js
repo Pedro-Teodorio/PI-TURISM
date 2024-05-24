@@ -221,21 +221,22 @@ function deleteAdmin(){
 	const msg_error = document.querySelector("#msg-error-delete");
 	deleteForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		let deleteFormData = new FormData(deleteForm);
-		deleteFormData.append("delete", 1);
-		const data = await fetch("../../app/helpers/admin/excluir.php", {
-			method: "POST",
-			body: deleteFormData,
-		});
-		const { erro, mensagem } = await data.json();
-		if (!erro) {
-			adminModalDelete.hide();
-			table_admins.innerHTML = "";
-			listAllAdmins("");
-			msg_success.innerHTML = mensagem;
-		} else {
-			msg_error.innerHTML = mensagem;
-		}
+		alert("Não é possível excluir um administrador");
+		// let deleteFormData = new FormData(deleteForm);
+		// deleteFormData.append("delete", 1);
+		// const data = await fetch("../../app/helpers/admin/excluir.php", {
+		// 	method: "POST",
+		// 	body: deleteFormData,
+		// });
+		// const { erro, mensagem } = await data.json();
+		// if (!erro) {
+		// 	adminModalDelete.hide();
+		// 	table_admins.innerHTML = "";
+		// 	listAllAdmins("");
+		// 	msg_success.innerHTML = mensagem;
+		// } else {
+		// 	msg_error.innerHTML = mensagem;
+		// }
 	});
 
 }
