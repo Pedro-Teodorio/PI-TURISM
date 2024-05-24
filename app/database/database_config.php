@@ -1,9 +1,23 @@
 <?php
-$host = "localhost";
-$db = "echo";
-$user = "root";
-$password = "";
+$host = "144.22.157.228";
+$db = "Echo";
+$user = "echo";
+$password = "echo";
 $charset = "utf8mb4";
+
+/**
+ * Arquivo de conexão com o banco de dados local.
+ * @param string $host     The host name or IP address of the MySQL server.
+ * @param string $db       The name of the database to connect to.
+ * @param string $charset  The character set to use for the connection.
+ * @return PDO            A PDO object representing the database connection.
+    $host = "localhost";
+    $db = "echo";
+    $user = "root";
+    $password = "";
+    $charset = "utf8mb4";
+ */
+
 /**
  * Arquivo de conexão com o banco de dados.
  * @param string $host     The host name or IP address of the MySQL server.
