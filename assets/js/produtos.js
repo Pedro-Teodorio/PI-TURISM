@@ -14,7 +14,7 @@ async function listAllProdutos(nome) {
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
+			<td colspan="11" class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
 		`;
 		table_produto.appendChild(tr);
 	}
