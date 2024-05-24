@@ -8,11 +8,13 @@ async function listAllProdutos(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/produtos/listar.php" : `../../app/helpers/produtos/listar.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
+	
 	if (dados.length === 0) {
+		
 		table_produto.innerHTML = "";
 		const tr = document.createElement("tr");
 		tr.innerHTML = `
-			<td colspan="11 class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
+			<td colspan="11" class="text-center text-danger fw-bold">Nenhum produto encontrado</td>
 		`;
 		table_produto.appendChild(tr);
 	}
@@ -67,7 +69,6 @@ async function listProdutosAtivos(nome) {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
 		let status = PRODUTO_ATIVO === 1 ? "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>" : "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
-		console.log(IMAGEM_URL);
 		tr.innerHTML = `
 			<td>${PRODUTO_ID}</td>
 			<td>${PRODUTO_NOME}</td>
@@ -115,7 +116,6 @@ async function listProdutosInativos(nome) {
 		const { PRODUTO_ID, PRODUTO_NOME, PRODUTO_DESC, PRODUTO_PRECO, PRODUTO_DESCONTO, PRODUTO_ATIVO, CATEGORIA_NOME, PRODUTO_QTD, IMAGEM_URL, IMAGEM_ORDEM } = produto;
 		const tr = document.createElement("tr");
 		let status = PRODUTO_ATIVO === 1 ? "<span class=' text-bg-success p-2 rounded-3'>Ativo</span>" : "<span class=' text-bg-danger p-2 rounded-3'>Inativo</span>";
-		console.log(IMAGEM_URL);
 		tr.innerHTML = `
 			<td>${PRODUTO_ID}</td>
 			<td>${PRODUTO_NOME}</td>
@@ -162,8 +162,6 @@ async function editarProduto(id) {
 	const data = await fetch(`../../app/helpers/produtos/pegar_por_id.php?id=${id}`);
 	const { erro, dados } = await data.json();
 
-	console.log(dados);
-
 	editIDInput.value = dados[0].PRODUTO_ID;
 	inputNameEdit.value = dados[0].PRODUTO_NOME;
 	inputDescEdit.value = dados[0].PRODUTO_DESC;
@@ -184,7 +182,6 @@ async function editarProduto(id) {
 		images.push({ id: dado.IMAGEM_ID, url: dado.IMAGEM_URL, ordem: dado.IMAGEM_ORDEM });
 	});
 
-	console.log(images);
 
 	images.forEach((image) => {
 		tab_images.innerHTML += `
@@ -441,24 +438,25 @@ function deleteProduto(){
 	const msg_error = document.querySelector("#msg-error-delete");
 	formProdutosDelete.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		const formData = new FormData(formProdutosDelete);
-		formData.append("deleteProdutos",1)
-		const url = "../../app/helpers/produtos/excluir.php";
-		const data = await fetch(url, {
-			method: "POST",
-			body: formData,
-		});
-		const {erro,mensagem} = await data.json();
-		if(!erro){
-			formProdutosDelete.reset();
-			produtoModalDelete.hide();
-			table_produto.innerHTML = "";
-			listAllProdutos("");
-			msg_success.innerHTML = mensagem;
-		}
-		else{
-			msg_error.innerHTML = mensagem;
-		}
+		alert("Não é possível excluir um produto, pois ele pode estar associado a um pedido.");
+		// const formData = new FormData(formProdutosDelete);
+		// formData.append("deleteProdutos",1)
+		// const url = "../../app/helpers/produtos/excluir.php";
+		// const data = await fetch(url, {
+		// 	method: "POST",
+		// 	body: formData,
+		// });
+		// const {erro,mensagem} = await data.json();
+		// if(!erro){
+		// 	formProdutosDelete.reset();
+		// 	produtoModalDelete.hide();
+		// 	table_produto.innerHTML = "";
+		// 	listAllProdutos("");
+		// 	msg_success.innerHTML = mensagem;
+		// }
+		// else{
+		// 	msg_error.innerHTML = mensagem;
+		// }
 	});
 
 }
