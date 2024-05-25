@@ -35,7 +35,6 @@ async function listAdminsAtivos(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/admin/listar_admin_ativos.php" : `../../app/helpers/admin/listar_admin_ativos.php?nome=${nome}`;
 	const data = await fetch(url_vazia);
 	const { erro, dados } = await data.json();
-	console.log(dados);
 	if (dados.length === 0) {
 		table_admins.innerHTML = "";
 		const tr = document.createElement("tr");
