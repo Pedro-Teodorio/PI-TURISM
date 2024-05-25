@@ -116,7 +116,7 @@
                                 <div class="col-6">
                                     <label for="exampleFormControlInput1" class="form-label">Quantidade de
                                         Produto</label>
-                                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a quantidade" name="quantidade" step="0.01" />
+                                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a quantidade" name="quantidade" min="1"/>
                                 </div>
                             </div>
                             <div class="mb-3"></div>
@@ -222,7 +222,7 @@
                                 <div class="col-6">
                                     <label for="exampleFormControlInput1" class="form-label">Quantidade de
                                         Produto</label>
-                                    <input type="number" class="form-control" id="editQuantidadeInput" placeholder="Digite o desconto" name="quantidade" />
+                                    <input type="number" class="form-control" id="editQuantidadeInput" placeholder="Digite o desconto" name="quantidade" min="1" />
                                 </div>
                             </div>
                             <div class="mb-3"></div>
