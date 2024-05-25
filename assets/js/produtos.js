@@ -189,11 +189,11 @@ async function editarProduto(id) {
 			<div class="row mb-3 mt-3">
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">URL Imagem</label>
-					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}" required/>
+					<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a URL da imagem" name="imagem_url[]" value="${image.url}" />
 				</div>
 				<div class="col-6">
 					<label for="exampleFormControlInput1" class="form-label">Ordem da Imagem</label>
-					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}" required />
+					<input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Digite a ordem da imagem" min="1" name="imagem_ordem[]" value="${image.ordem}"  />
 			  	</div>
 			</div>
 
@@ -418,6 +418,7 @@ function updateProdutos(){
 		});
 		const {erro,mensagem} = await data.json();
 		if(!erro){
+			tab_images.innerHTML = "";
 			formProdutosEdit.reset();
 			produtoModalEdit.hide();
 			table_produto.innerHTML = "";

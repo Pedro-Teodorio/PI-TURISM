@@ -45,7 +45,7 @@ foreach ($imagem_urls as $index => $url) {
     $stmt_imagem->execute();
 }
 
-if ($stmt->rowCount()) {
+if ($stmt->rowCount() || $stmt_imagem->rowCount()) {
     $retorna = [
         'erro' => false, 'mensagem' => ' 
             <div class="alert alert-success alert-dismissible position-fixed bottom-0 end-0 m-4" role="alert">
