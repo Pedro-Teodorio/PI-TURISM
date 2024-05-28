@@ -462,6 +462,19 @@ function deleteProduto(){
 
 }
 
+
+function cleanSearch(){
+	const searchInput = document.querySelector("#searchInput");
+	const searchRadioTodos = document.querySelector("#radioTodos");
+	searchRadioTodos.checked = true;
+	searchInput.value = "";
+	table_produto.innerHTML = "";
+	listAllProdutos("");
+}
+
+const btn_clean = document.querySelector(".btn-clean-search-admin");
+btn_clean.addEventListener("click", cleanSearch);
+
 listAllProdutos("");
 loadSelectCategorias();
 loadSelectCategoriasEdit();

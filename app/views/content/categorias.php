@@ -20,6 +20,7 @@
                 <label class="form-check-label" for="radioInativos">Inativos</label>
             </div>
 
+            <button class="btn btn-danger border-0 btn-clean-search-admin ms-1 me-3">Limpar</button>
             <button class="btn btn-success border-0 btn-search-admin">Buscar</button>
 
         </div>

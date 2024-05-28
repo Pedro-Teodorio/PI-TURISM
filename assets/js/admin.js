@@ -1,5 +1,6 @@
 //#region Scripts for Admin Dashboard
 const table_admins = document.querySelector("#table-admins");
+const btn_clean = document.querySelector(".btn-clean-search-admin");
 
 async function listAllAdmins(nome) {
 	let url_vazia = nome === "" ? "../../app/helpers/admin/listar.php" : `../../app/helpers/admin/listar.php?nome=${nome}`;
@@ -160,7 +161,6 @@ function verifySearchRadioAdmin() {
 //#endregion
 
 
-
 function addAdmin() {
 const formAddAdmin = document.querySelector("#formAddAdmin");
 const adminModal = new bootstrap.Modal("#adminModal");
@@ -187,7 +187,6 @@ formAddAdmin.addEventListener("submit", async (e) => {
 	}
 });
 }
-
 function updateAdmin() {
 	const editForm = document.querySelector("#editForm");
 	const adminModalEdit = new bootstrap.Modal("#adminModalEdit");
@@ -239,6 +238,18 @@ function deleteAdmin(){
 	});
 
 }
+
+function cleanSearch(){
+	const searchInput = document.querySelector("#searchInput");
+	const searchRadioTodos = document.querySelector("#radioTodos");
+	searchRadioTodos.checked = true;
+	searchInput.value = "";
+	table_admins.innerHTML = "";
+	listAllAdmins("");
+}
+
+btn_clean.addEventListener("click", cleanSearch);
+
 listAllAdmins("");
 verifySearchRadioAdmin();
 

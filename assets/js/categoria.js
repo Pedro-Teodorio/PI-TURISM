@@ -236,6 +236,18 @@ function deletarCategoria(id) {
 	deleteIdInput.value = id;
 }
 
+function cleanSearch(){
+	const searchInput = document.querySelector("#searchInput");
+	const searchRadioTodos = document.querySelector("#radioTodos");
+	searchRadioTodos.checked = true;
+	searchInput.value = "";
+	table_categoria.innerHTML = "";
+	listAllCategorias("");
+}
+
+const btn_clean = document.querySelector(".btn-clean-search-admin");
+btn_clean.addEventListener("click", cleanSearch);
+
 listAllCategorias("");
 verifySearchRadioCategorias();
 
